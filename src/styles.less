@@ -1,0 +1,467 @@
+@import './variables.less';
+
+@font-face {
+    font-family: 'OpenSans_Regular';
+    src: url('assets/fonts/opensans-regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/opensans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AgencyFB';
+    src: url('assets/fonts/AgencyFB-Reg.woff2') format('woff2'),
+         url('assets/fonts/AgencyFB-Reg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neuropol';
+    src: url('assets/fonts/Neuropol.woff2') format('woff2'),
+         url('assets/fonts/Neuropol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ----------------------------------------------------------------------------------------------*/
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+/* ----------------------------------------------------------------------------------------------*/
+
+body, td, input, select, textarea {
+	font-size: 13px;
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	color: #000;
+	line-height: 1.3em;
+}
+
+body {
+	background-color: #333;
+}
+
+.bodyContainer {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+p {
+	margin: .5em 0;
+}
+
+input {
+	line-height: 1.4em;
+}
+
+input, textarea {
+	padding: 4px 5px;
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+input[type="text"], input[type="number"], input[type="password"], input[type="button"], input[type="file"], select, textarea {
+	background: @input-bg;
+	border: 1px solid @input-border-tl;
+	border-bottom-color: @input-border-br;
+	border-right-color: @input-border-br;
+	border-radius: 6px;
+	box-sizing: border-box;
+	outline: none;
+}
+
+input[disabled='disabled'] {
+	color: #999;
+}
+
+input[type="image"] {
+	vertical-align: middle;
+}
+
+input[type="checkbox"] {
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+textarea {
+	height: 4.5em;
+	resize: none;
+}
+
+select {
+	margin-top: 1px;
+}
+
+hr {
+	border: none;
+	height: 1px;
+	color: #888;
+	background-color: #888;
+	margin: 1.25em 0;
+}
+
+table {
+	width: 100%;
+}
+
+td, th {
+	vertical-align: top;
+	padding: 2px 2px;
+}
+
+label {
+	display: block;
+
+	&[for] {
+		cursor: pointer;
+	}
+
+	.labelText {
+		display: inline-block;
+		cursor: pointer;
+	}
+}
+
+ul {
+	list-style: disc;
+	margin-left: 20px;
+}
+
+h1 {
+	margin: 0 0 .4em;
+	font-family: "AgencyFB";
+	font-size: 2.6em;
+	font-weight: bold;
+	line-height: 1.6em;
+	text-align: center;
+	color: #B00;
+}
+
+h2 {
+	margin: 0 0 1em;
+	font-size: 1.2em;
+	text-align: left;
+	line-height: 1.6em;
+}
+
+h3 {
+	font-family: "AgencyFB";
+	font-size: 1.8em;
+	line-height: 1.2em;
+	margin-bottom: .35em;
+	text-decoration: none;
+}
+
+h1.headerbar, h2.headerbar, h3.headerbar, h4.headerbar {
+	margin: .5em 0;
+	font-family: "AgencyFB";
+	color: #FFF;
+	background: #C60;
+	text-align: left;
+}
+
+h2.hbDark, h3.hbDark, h4.hbDark {
+	background: #222;
+}
+
+div.headerbar {
+	color: #FFF;
+	background: #222;
+}
+
+h1.headerbar {
+	height: 1.3em;
+	margin-top: .2em;
+	font-size: 2.5em;
+	line-height: 1.3em;
+}
+
+.modal h1.headerbar {
+	margin-top: 0;
+}
+
+h2.headerbar {
+	height: 1.4em;
+	font-size: 2.2em;
+	line-height: 1.4em;
+}
+
+h3.headerbar {
+	font-size: 1.8em;
+	line-height: 1.3em;
+}
+
+.headerbar {
+	& > div {
+		padding: 0 8px;
+	}
+
+	a, a:visited, a:active {
+		color: #FFF;
+	}
+
+	a:hover {
+		color: #FFF;
+		font-style: italic;
+	}
+}
+
+h1, h2, h3, h4 {
+	&.hb_hasButton {
+		margin-top: 0;
+	}
+
+	&.hb_hasList {
+		margin-bottom: 0;
+	}
+}
+
+sup {
+	font-size: .8em;
+	vertical-align: super;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+.trapezoid {
+	border-style: solid;
+}
+
+.vAlignMiddle > * {
+	vertical-align: middle;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.floatRight {
+	float: right;
+}
+
+/* ----------------------------------------------------------------------------------------------*/
+
+/* Links */
+a, a:visited, a:active, .fauxLink, button.normal, button.normal:visited, button.normal:active {
+	text-decoration: none;
+	color: #B00;
+	outline: none;
+	cursor: pointer;
+}
+
+a[name] {
+	position: relative;
+	top: -70px;
+}
+
+a.noPointer {
+	cursor: default;
+}
+
+a:hover {
+	color: #06D;
+/*	text-decoration: underline;*/
+}
+
+a.username, a.username:visited, a.username:active {
+	color: #06F;
+}
+
+a.username:hover {
+	text-decoration: underline;
+}
+
+a.fancyButton, a.fancyButton:visited, a.fancyButton:active, .redTrapezoid {
+	font-family: Neuropol;
+	font-size: 1.6em;
+	line-height: 1.2em;
+	background-color: #800;
+	color: #FFF;
+}
+
+.fancyButton.smallButton {
+	&, &:visited, &:active {
+		font-size: 1.3em;
+		line-height: 1.2em;
+	}
+}
+
+.hbTopper .fancyButton, .hbdTopper .fancyButton {
+	display: block;
+	float: left;
+}
+
+.redWing {
+	display: block;
+}
+
+a.fancyButton > div, .redWing > div {
+	display: inline-block;
+	padding: 3px 8px;
+}
+
+a.fancyButton:hover {
+	color: #BBB;
+	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
+}
+
+/* ----------------------------------------------------------------------------------------------*/
+
+/* Button */
+button, button:visited, button:active, a.button, a.button:visited, a.button:active {
+	width: auto;
+	height: auto;
+	color: #B00;
+	background: none;
+	outline: none;
+	font-family: Neuropol;
+	font-size: 2em;
+	line-height: 1.2em;
+	cursor: pointer;
+}
+
+button:hover, a.button:hover {
+/*	color: #06D;*/
+	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
+}
+
+button.normal, button.normal:visited, button.normal:active {
+	font-family: inherit;;
+	font-size: 1em;
+	line-height: 1em;
+}
+
+.fancyButton {
+	position: relative;
+/*	overflow: hidden;*/
+	display: inline-block;
+	padding: 0;
+}
+
+button.fancyButton, button.fancyButton:visited, button.fancyButton:active {
+	padding: 3px 8px;
+	background: #800;
+	font-size: 1.5em;
+	line-height: 1.2em;
+	color: #FFF;
+}
+
+.fancyButton.disabled button, .fancyButton.disabled button:visited, .fancyButton.disabled button:active {
+	background: #844;
+	color: #BBB;
+}
+
+.fancyButton.disabled:hover button {
+	text-shadow: 0 0 10px rgba(150, 150, 150, 1);
+}
+
+.fancyButton .dlWing, .fancyButton .urWing {
+	position: absolute;
+	top: 0;
+	margin: 0;
+}
+
+.fancyButton .dlWing {
+	left: 0;
+	border-top: 45px solid transparent;
+	border-right: 32px solid #800;
+}
+
+.fancyButton.disabled .dlWing {
+	border-right-color: #844;
+}
+
+.fancyButton .urWing {
+	right: 0;
+	border-top: 45px solid #800;
+	border-right: 32px solid transparent;
+}
+
+.fancyButton.disabled .urWing {
+	border-top-color: #844;
+}
+
+.fancyButton:hover button {
+	color: #BBB;
+}
+
+/* ----------------------------------------------------------------------------------------------*/
+
+// .iconLink {
+// 	display: inline-block;
+// 	height: 20px;
+// 	width: 20px;
+// 	overflow: hidden;
+// 	text-indent: -9999px;
+// 	background-position: top left;
+// 	background-repeat: no-repeat;
+// }
+
+// .iconLink.edit {
+// 	background-image: url('../images/edit_wheel.png');
+// }
+
+// .iconLink.shuffle {
+// 	width: 27px !important;
+// 	background-image: url('../images/shuffle.png');
+// }
+
+// .iconLink.delete {
+// 	background-image: url('../images/cross.png');
+// }
+
+/* ----------------------------------------------------------------------------------------------*/
+
+.sectionControls {
+	float: right;
+
+	.content {
+		background-color: #222;
+	}
+
+	.leftWing, .rightWing {
+		border-bottom-color: #222;
+	}
+
+	a {
+		display: inline-block;
+		padding: .35em 15px;
+		color: #FDD;
+		background: #522;
+		border-top: .3em solid #222;
+		border-left: 2px solid #222;
+	}
+
+	a:first-child {
+		border-left: none;
+	}
+
+	.current, a:hover {
+		color: #F00;
+		background: #222;
+	}
+}

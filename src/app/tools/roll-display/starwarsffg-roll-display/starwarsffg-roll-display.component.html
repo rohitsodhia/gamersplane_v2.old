@@ -1,0 +1,5 @@
+<p>
+	<gp-starwarsffg-die *ngFor="let die of roll" [die]="die.type" [face]="die.roll"></gp-starwarsffg-die>
+</p>
+<p *ngIf="sumString.length">{{sumString}}</p>
+<p *ngIf="totalString.length"><strong>Total:</strong> {{totalString}}</p>

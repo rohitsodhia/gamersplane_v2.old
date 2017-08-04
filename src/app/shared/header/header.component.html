@@ -1,0 +1,45 @@
+<header>
+	<div id="headerBG"></div>
+	<div class="bodyContainer">
+		<gp-logo [height]="110"></gp-logo>
+		<ul id="mainMenu">
+			<li>
+				<a (click)="toggleMenu($event, '/tools', 'tools')" class="first">Tools</a>
+				<ul [@slideHeight]="toggleHeight['tools']">
+					<li><a routerLink="/tools/dice">Dice</a></li>
+					<li><a routerLink="/tools/cards">Cards</a></li>
+					<li><a routerLink="/tools/music">Music</a></li>
+				</ul>
+			</li>
+			<li><a routerLink="/systems">Systems</a></li>
+			<li *ngIf="loggedIn">
+				<a routerLink="/characters/my">Characters</a>
+				<!-- <ul ng-if="characters.length">
+					<li ng-repeat="char in characters | limitTo: 5"><a routerLink="/characters/{{char.system}}/{{char.characterID}}" ng-bind-html="char.label | trustHTML"></a></li>
+					<li><a routerLink="/characters/my">All characters</a></li>
+				</ul> -->
+			</li>
+			<li>
+				<a [routerLink]="['/games', loggedIn ? 'list' : '']">Games</a>
+				<!-- <ul ng-if="loggedIn && games.length">
+					<li ng-repeat="game in games | limitTo: 5"><a routerLink="/games/{{game.gameID}}"><span ng-bind-html="game.title | trustHTML"></span> <img ng-if="game.isGM" src="/images/gm_icon.png"></a></li>
+					<li><a routerLink="/games/my">All games</a></li>
+				</ul> -->
+			</li>
+			<li><a routerLink="/forums">Forums</a></li>
+			<li *ngIf="loggedIn"><a routerLink="/gamersList">The Gamers</a></li>
+			<li><a routerLink="/links">Links</a></li>
+			<li id="headerRegister" *ngIf="!loggedIn"><a routerLink="/register" class="last">Register</a></li>
+			<li id="headerLogin" *ngIf="!loggedIn"><a routerLink="/login" colorbox>Login</a></li>
+			<li *ngIf="loggedIn" id="userMenu">
+				<!-- <a routerLink="/ucp" class="avatar"><img ng-src="{{avatar}}"></a>
+				<a ng-if="pmCount > 0" routerLink="/pms" class="mail"><img src="/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a> -->
+				<ul>
+					<li><a routerLink="/ucp">Profile</a></li>
+					<li><a routerLink="/pms">Messages ({{pmCount}})</a></li>
+					<li><a routerLink="/logout" class="last">Logout</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</header>

@@ -1,0 +1,197 @@
+/deep/ #diceTypeSelect {
+	.wrapper {
+		border-top: 2px solid #000;
+	}
+
+	.current, .options {
+		border: none;
+		border-radius: 0;
+		background: #522;
+		color: #FFF;
+	}
+
+	.wrapper, .current {
+		height: 2em;
+	}
+
+	.dropdown {
+		background: url('/assets/images/dropdown_arrow_white.png') center center no-repeat;
+	}
+
+	.current, .dropdown, .options li {
+		padding: .3em .8em;
+	}
+}
+
+#roller {
+	width: 400px;
+	margin-right: 20px;
+	float: left;
+
+	label {
+		display: inline-block;
+	}
+}
+
+.rollWrapper, .cbWrapper {
+	display: inline-block;
+}
+
+.dice_basic {
+	.rollWrapper {
+		margin: 0 5px;
+	}
+}
+
+#basic_indivDice {
+	& > div {
+		text-align: center;
+	}
+
+	button {
+		margin: 8px 10px 0;
+	}
+}
+
+.dice_starwarsffg {
+	.dicePool {
+		display: inline-block;
+		min-height: 60px;
+		width: 280px;
+		margin: .5em 10px .5em 0;
+		padding: 0 10px 10px 0;
+		background: #DDF;
+		border: 1px solid #400;
+		border-bottom-color: #900;
+		border-right-color: #900;
+		border-radius: 6px;
+
+		gp-starwarsffg-die {
+			display: block;
+			float: left;
+			margin: 10px 0 0 10px;
+			cursor: pointer;
+		}
+	}
+
+	.rollWrapper {
+		width: 90px;
+		text-align: center;
+
+		button {
+			margin-bottom: .2em;
+		}
+	}
+
+	.addDiceLink {
+		display: inline-block;
+		width: 48%;
+		margin: 5px 1%;
+		padding: 5px 10px;
+		border: 1px solid #000;	
+		box-sizing: border-box;
+		font-family: 'AgencyFB';
+		font-size: 2em;
+		line-height: 1em;
+
+		&.ability {
+			background-color: rgba(79, 184, 71, .5);
+		}
+
+		&.difficulty {
+			background-color: rgba(83, 35, 128, .5);
+		}
+
+		&.proficiency {
+			background-color: rgba(255, 233, 0, .5);
+		}
+
+		&.challenge {
+			background-color: rgba(229, 25, 55, .5);
+		}
+
+		&.boost {
+			background-color: rgba(163, 217, 246, .5);
+		}
+
+		&.setback {
+			background-color: rgba(0, 0, 0, .5);
+		}
+
+		&.force {
+			display: block;
+			float: none;
+			margin: 5px auto;
+		}
+	}
+
+	.addDiceLink, .addDiceLink:active, .addDiceLink:visited {
+		color: #000;
+	}
+
+	.addDiceLink:hover span {
+		text-decoration: underline;
+	}
+
+	.addDiceLink span {
+		margin-left: 5px;
+	}
+
+	.addDiceLink > * {
+		vertical-align: middle;
+	}
+}
+
+#diceSpace {
+	height: 292px;
+	border: 1px solid #A00;
+	overflow: auto;
+	background: #EEE;
+
+	.roll {
+		margin: 0;
+		padding: .5em 1em;
+		font-size: 1.15em;
+		line-height: 1.3em;
+		overflow: hidden;
+	}
+
+	.roll p {
+		margin: .3em 0 0;
+	}
+
+	.rollString {
+		margin: 0;
+	}
+
+	/*.newestRoll {
+		display: none;
+		margin: 1em;
+		background-color: #222;
+	}*/
+
+	.newestRolls {
+		border-bottom: 1px solid #D99;
+		background-color: #FFF;
+	}
+
+	.newestRolls p.error {
+		font-weight: bold;
+	}
+
+	/deep/ gp-starwarsffg-die, /deep/ gp-fate-die {
+		margin-right: 10px;
+	}
+
+	/deep/ gp-fate-die {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+.dice_fate {
+	input {
+		width: 30px;
+		text-align: center;
+	}
+}

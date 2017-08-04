@@ -1,0 +1,98 @@
+@import '../../../variables.less';
+
+.wrapper {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.wrapper.open {
+	z-index: 5001;
+	overflow: visible;
+}
+
+.wrapper, .current {
+	height: 1.9em;
+}
+
+.current, .options {
+	background: @input-bg;
+	border-radius: @border-radius;
+}
+
+.current, .options {
+/*	border: 1px solid #CCC;
+	background-color: #EEE;*/
+	border: 1px solid @input-border-tl;
+	border-bottom-color: @input-border-br;
+	border-right-color: @input-border-br;
+	color: #000;
+}
+
+.open .current {
+	border: none;
+}
+
+.wrapper > * {
+	display: inline-block;
+}
+
+.current {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	line-height: 1.3em;
+	box-sizing: border-box;
+}
+
+.dropdown {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 15px;
+	height: @line-height;
+	vertical-align: top;
+	background: url('/assets/images/dropdown_arrow_red.png') center center no-repeat;
+}
+
+.current, .dropdown, .options li {
+	padding: .3em .5em;
+	cursor: pointer;
+}
+
+.options {
+	// display: none;
+	position: relative;
+	overflow: auto;
+	margin: 0;
+	visibility: hidden;
+	list-style: none;
+
+	&.showScroll {
+		overflow-y: scroll;
+	}
+
+	li {
+		padding-right: 30px !important;
+	}
+
+	li:hover {
+		background: #99C;
+	}
+
+	.disabled {
+		color: #999;
+
+		&:hover {
+			background: none;
+		}
+	}
+}
+
+.open .options {
+	visibility: visible;
+	z-index: 5002;
+}

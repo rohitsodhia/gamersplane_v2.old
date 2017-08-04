@@ -1,0 +1,88 @@
+<h1 class="headerbar" gp-skew>Dice Roller</h1>
+
+<div id="roller">
+	<div id="diceTypeSelect" class="clearfix">
+		<gp-trapezoid class="sectionControls">
+			<rs-pretty-select [options]="diceTypes" (valueChange)="changeDiceType($event)"></rs-pretty-select>
+		</gp-trapezoid>
+	</div>
+	<h2 class="headerbar hbDark hb_hasButton" gp-skew>{{diceTypes[currentType]}}</h2>
+	<ng-container [ngSwitch]="currentType">
+		<div class="dice_basic" *ngSwitchCase="'basic'">
+			<p>Dice should be in the format<br>(number of dice)d(die type)(modifier)</p>
+			<p>Separate rolls should be separated by commas or on new lines.</p>
+			<p><i>Example: 2d4, 3d6+4</i></p>
+			<div id="basic_customDice">
+				<div class="clearfix vAlignMiddle">
+					<textarea id="basic_dice" name="dice" #basicDice></textarea>
+					<div class="rollWrapper"><button type="submit" class="fancyButton rollBtn" (click)="rollBasicDice(basicDice.value, rerollAcesCB.currentValue)" gp-skew>Roll</button></div>
+					<div class="cbWrapper">
+						<gp-pretty-checkbox #rerollAcesCB></gp-pretty-checkbox><label for (click)="rerollAcesCB.toggle()">Reroll Aces</label>
+					</div>
+				</div>
+				<div id="basic_indivDice">
+					<div>
+						<button *ngFor="let num of [4, 6, 8, 10]" (click)="rollBasicDie(num)" class="diceButton fancyButton" gp-skew>d{{num}}</button>
+					</div>
+					<div>
+						<button *ngFor="let num of [12, 20, 100]" (click)="rollBasicDie(num)" class="diceButton fancyButton" gp-skew>d{{num}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dice_starwarsffg" *ngSwitchCase="'starwarsffg'">
+			<div class="clearfix vAlignMiddle">
+				<div class="dicePool">
+					<gp-starwarsffg-die *ngFor="let die of starWarsFFGDicePool; let index = index" (click)="removeStarWarsFFGDie(index)" [die]="die"></gp-starwarsffg-die>
+				</div>
+				<div class="rollWrapper">
+					<button type="submit" class="fancyButton rollBtn" (click)="rollStarWarsFFGDice()" gp-skew>Roll</button>
+					<a (click)="clearStarWarsFFGDice()">Clear</a>
+				</div>
+			</div>
+			<p>
+				Click on a die below to add it to the dice pool.<br>
+				Click on a die above to remove it from the dice pool.
+			</p>
+			<div *ngFor="let typeGroup of starWarsFFGDisplay" class="clearfix">
+				<a *ngFor="let type of typeGroup; let first = first;" (click)="addStarWarsFFGDie(type)" class="addDiceLink" [ngClass]="type">
+					<gp-starwarsffg-die [die]="type"></gp-starwarsffg-die>
+					<span>{{type.ucFirst()}}</span>
+				</a>
+			</div>
+			<div class="alignCenter">
+				<a (click)="addStarWarsFFGDie(type)" class="addDiceLink borderBox force">
+					<gp-starwarsffg-die [die]="'force'"></gp-starwarsffg-die>
+					<span>Force</span>
+				</a>
+			</div>
+		</div>
+		<div class="dice_fate" *ngSwitchCase="'fate'">
+			<div class="clearfix">
+				<label for="fate_count">Number of dice: </label>
+				<input id="fate_count" type="number" value="4" min="1" #fateDice>
+				<label for="fate_modifier"> + Modifier: </label>
+				<input id="fate_modifier" type="number" value="0" #fateModifier>
+				<div class="rollWrapper"><button type="submit" class="fancyButton rollBtn" (click)="rollFateDice(fateDice.value, fateModifier.value)" gp-skew>Roll</button></div>
+			</div>
+		</div>
+		<div class="dice_fengshui hbdMargined" *ngSwitchCase="'fengshui'">
+			<div class="clearfix">
+				<label for="fengshui_av">Action Value: </label>
+				<input id="fengshui_av" type="number" value="0" min="0" step="1">
+				<select id="fengshui_type" name="fengshui_type">
+					<option value="standard">Standard</option>
+					<option value="fortune">Fortune</option>
+					<option value="closed">Closed</option>
+				</select>
+				<div class="rollWrapper"><button id="fengshui_roll" type="submit" name="roll" class="fancyButton rollBtn">Roll</button></div>
+			</div>
+		</div>
+	</ng-container>
+</div>
+
+<div id="diceSpace">
+	<div *ngFor="let roll of rolls; let first = first" class="roll" [class.newestRolls]="first" [@slideIn]="'open'">
+		<gp-roll-display [type]="roll.type" [roll]="roll.roll"></gp-roll-display>
+	</div>
+</div>
