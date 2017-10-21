@@ -1,3 +1,4 @@
+import { ModalService } from './../modal/modal.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private authService: AuthService
+		private modalService: ModalService,
+		private authService: AuthService,
 	) {
 		this.toggleHeight = {
 			tools: 'closed'
@@ -55,5 +57,9 @@ export class HeaderComponent implements OnInit {
 			
 	// 	}
 	// }
+
+	register() {
+		this.modalService.openModal('register');
+	}
 
 }

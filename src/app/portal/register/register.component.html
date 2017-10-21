@@ -1,0 +1,51 @@
+<form id="register" [formGroup]="register" (submit)="submitRegistration()">
+	<h2 class="headerbar hbDark" hbmGroup="hbd" gp-skew>Register</h2>
+	<div gp-hbMargin="hbd">
+		<div class="row" [class.focused]="focusOn === 'email'">
+			<label for="reg_email">Email</label> <input id="reg_email" type="text" formControlName="email" (focus)="setFocus('email')" (blur)="loseFocus()">
+			<div class="error" [hidden]="register.get('email').untouched || register.get('email').hasError('required') || register.get('email').valid">
+				Invalid email
+			</div>
+			<div class="error" [hidden]="!emailTaken">
+				Email already taken
+			</div>
+		</div>
+		<div class="row" [class.focused]="focusOn === 'username'">
+			<label for="reg_username">Username</label> <input id="reg_username" type="text" formControlName="username" (focus)="setFocus('username')" (blur)="loseFocus()">
+			<div class="info" [hidden]="focusOn !== 'username'" [class.hasError]="(register.get('username').touched && register.get('username').value.length && !register.get('username').hasError('required') && register.get('username').invalid) || usernameTaken">
+				<div class="notice">Usernames may contain letters, numbers, underscores (_), and periods (.)</div>
+				<div class="notice">Usernames may be up to 24 characters</div>
+				<div class="notice">Keep usernames PG-13 or safer.</div>
+			</div>
+			<div class="error" [hidden]="register.get('username').untouched || register.get('username').value.length === 0 || register.get('username').hasError('required') || register.get('username').valid">
+				Invalid username
+			</div>
+			<div class="error" [hidden]="!usernameTaken">
+				Username already taken
+			</div>
+		</div>
+		<ng-container formGroupName="password">
+			<div class="row" [class.focused]="focusOn === 'password'">
+				<label for="reg_password">Password</label> <input id="reg_password" type="password" formControlName="password" (focus)="setFocus('password')" (blur)="loseFocus()">
+				<div class="info" [hidden]="focusOn !== 'password'" [class.hasError]="!register.get('password').get('password').hasError('required') && register.get('password').get('password').touched && register.get('password').get('password').value.length < 8">
+					<div class="notice">Password must at least 8 characters long</div>
+				</div>
+				<div class="error" [hidden]="register.get('password').get('password').hasError('required') || register.get('password').get('password').untouched || register.get('password').get('password').value.length >= 8">
+					Password too short
+				</div>
+			</div>
+			<div class="row" [class.focused]="focusOn === 'confirmPassword'">
+				<label for="reg_confirmPassword">Repeat Password</label> <input id="reg_confirmPassword" type="password" formControlName="confirmPassword" (focus)="setFocus('confirmPassword')" (blur)="loseFocus()">
+				<div class="error" [hidden]="register.get('password').get('password').untouched || register.get('password').get('password').invalid || register.get('password').get('confirmPassword').untouched || register.get('password').get('confirmPassword').value.length === 0 || !register.get('password').hasError('mismatchedPasswords')">
+					Passwords don't match
+				</div>
+			</div>
+		</ng-container>
+		<div id="recaptcha" class="row">
+			<!-- <rs-recaptcha (resolved)="human = !!$event" siteKey="6LcT8gsTAAAAALlRVGdtM9iansESdnIdeCUIwoqG"></rs-recaptcha> -->
+		</div>
+		<div class="row center">
+			<button gp-skew class="fancyButton" [disabled]="register.invalid || !human || emailTaken || usernameTaken">Register</button>
+		</div>
+	</div>
+</form>

@@ -24,7 +24,7 @@
     font-style: normal;
 }
 
-/* ----------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------------- */
 
 .clearfix:after {
 	content: "";
@@ -36,7 +36,7 @@
 	display: none !important;
 }
 
-/* ----------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------------- */
 
 body, td, input, select, textarea {
 	font-size: 13px;
@@ -49,7 +49,7 @@ body {
 	background-color: #333;
 }
 
-.bodyContainer {
+.contentContainer {
 	width: 1200px;
 	margin: 0 auto;
 }
@@ -128,14 +128,9 @@ td, th {
 }
 
 label {
-	display: block;
+	display: inline-block;
 
-	&[for] {
-		cursor: pointer;
-	}
-
-	.labelText {
-		display: inline-block;
+	&[for], .labelText {
 		cursor: pointer;
 	}
 }
@@ -263,7 +258,7 @@ em {
 	float: right;
 }
 
-/* ----------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------------- */
 
 /* Links */
 a, a:visited, a:active, .fauxLink, button.normal, button.normal:visited, button.normal:active {
@@ -295,12 +290,61 @@ a.username:hover {
 	text-decoration: underline;
 }
 
-a.fancyButton, a.fancyButton:visited, a.fancyButton:active, .redTrapezoid {
+/* ---------------------------------------------------------------------------------------------- */
+
+/* Button */
+button, button:visited, button:active, a.button, a.button:visited, a.button:active {
+	width: auto;
+	height: auto;
+	color: #B00;
+	background: none;
+	outline: none;
 	font-family: Neuropol;
-	font-size: 1.6em;
+	font-size: 2em;
 	line-height: 1.2em;
-	background-color: #800;
-	color: #FFF;
+	cursor: pointer;
+}
+
+button:hover, a.button:hover {
+/*	color: #06D;*/
+	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
+}
+
+button.normal, button.normal:visited, button.normal:active {
+	font-family: inherit;
+	font-size: 1em;
+	line-height: 1em;
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+/* Fancy Button */
+
+.fancyButton {
+	position: relative;
+/*	overflow: hidden;*/
+	display: inline-block;
+	padding: 0;
+}
+
+.fancyButton {
+	&, &:visited, &:active {
+		font-family: Neuropol;
+		font-size: 1.6em;
+		line-height: 1.2em;
+		background-color: #800;
+		color: #FFF;
+	
+		&[disabled] {
+			background-color: #A44;
+			color: #888;
+			text-shadow: none;
+			cursor: default;
+		}
+	}
+}
+
+a.fancyButton, a.fancyButton:visited, a.fancyButton:active, .redTrapezoid {
 }
 
 .fancyButton.smallButton {
@@ -329,45 +373,10 @@ a.fancyButton:hover {
 	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
 }
 
-/* ----------------------------------------------------------------------------------------------*/
-
-/* Button */
-button, button:visited, button:active, a.button, a.button:visited, a.button:active {
-	width: auto;
-	height: auto;
-	color: #B00;
-	background: none;
-	outline: none;
-	font-family: Neuropol;
-	font-size: 2em;
-	line-height: 1.2em;
-	cursor: pointer;
-}
-
-button:hover, a.button:hover {
-/*	color: #06D;*/
-	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
-}
-
-button.normal, button.normal:visited, button.normal:active {
-	font-family: inherit;;
-	font-size: 1em;
-	line-height: 1em;
-}
-
-.fancyButton {
-	position: relative;
-/*	overflow: hidden;*/
-	display: inline-block;
-	padding: 0;
-}
-
-button.fancyButton, button.fancyButton:visited, button.fancyButton:active {
-	padding: 3px 8px;
-	background: #800;
-	font-size: 1.5em;
-	line-height: 1.2em;
-	color: #FFF;
+button.fancyButton {
+	&, &:visited, &:active {
+		padding: 3px 8px;
+	}
 }
 
 .fancyButton.disabled button, .fancyButton.disabled button:visited, .fancyButton.disabled button:active {
@@ -379,37 +388,7 @@ button.fancyButton, button.fancyButton:visited, button.fancyButton:active {
 	text-shadow: 0 0 10px rgba(150, 150, 150, 1);
 }
 
-.fancyButton .dlWing, .fancyButton .urWing {
-	position: absolute;
-	top: 0;
-	margin: 0;
-}
-
-.fancyButton .dlWing {
-	left: 0;
-	border-top: 45px solid transparent;
-	border-right: 32px solid #800;
-}
-
-.fancyButton.disabled .dlWing {
-	border-right-color: #844;
-}
-
-.fancyButton .urWing {
-	right: 0;
-	border-top: 45px solid #800;
-	border-right: 32px solid transparent;
-}
-
-.fancyButton.disabled .urWing {
-	border-top-color: #844;
-}
-
-.fancyButton:hover button {
-	color: #BBB;
-}
-
-/* ----------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------------- */
 
 // .iconLink {
 // 	display: inline-block;
@@ -434,7 +413,7 @@ button.fancyButton, button.fancyButton:visited, button.fancyButton:active {
 // 	background-image: url('../images/cross.png');
 // }
 
-/* ----------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------------- */
 
 .sectionControls {
 	float: right;

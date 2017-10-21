@@ -1,3 +1,12 @@
-<p>
-  combobox works!
-</p>
+<div ng-click="$event.stopPropagation()" class="combobox" [ngClass]="{ 'autocomplete': usingAutocomplete, 'focused': hasFocus, 'resultsOpen': showDropdown && filteredOptions.length }" (blur)="test()">
+	<input type="text" [(ngModel)]="search" (ngModelChange)="filterOptions($event)" (change)="changeDropdownVis(true)" (focus)="inputFocused()" (blur)="inputBlurred()" (keydown)="navigateResults($event)">
+	<a class="dropdown" (click)="toggleDropdownVis()" [hidden]="usingAutocomplete">
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 viewBox="0 0 14 10" enable-background="new 0 0 14 10" xml:space="preserve">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M14,4.6L7,10L0,4.6V1l7,5.4L14,1V4.6z" />
+		</svg>
+	</a>
+	<div #results class="results" [hidden]="!showDropdown || filteredOptions.length === 0">
+		<a *ngFor="let set of filteredOptions; let index = index;" (mousedown)="setBox(set)" [ngClass]="set.class" [class.selected]="curSelected === index" [innerHTML]="set.display"></a>
+	</div>
+</div>

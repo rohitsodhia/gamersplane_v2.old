@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FfgDieComponent } from './starwarsffg-die.component';
+import { StarWarsFFGDieComponent } from './starwarsffg-die.component';
 
 describe('StarWarsFFGDieComponent', () => {
-  let component: FfgDieComponent;
-  let fixture: ComponentFixture<FfgDieComponent>;
+  let component: StarWarsFFGDieComponent;
+  let fixture: ComponentFixture<StarWarsFFGDieComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FfgDieComponent ]
+      declarations: [ StarWarsFFGDieComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FfgDieComponent);
+    fixture = TestBed.createComponent(StarWarsFFGDieComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -23,7 +23,6 @@
 				"styles.less"
 			],
 			"scripts": [
-				"utils.ts"
 			],
 			"environmentSource": "environments/environment.ts",
 			"environments": {
@@ -58,7 +57,7 @@
 		"component": {},
 		"serve": {
 			"host": "gamersplane.local",
-			"port": 80
+			"port": 443
 		}
 	}
 }

@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import * as utils from '../../utils';
+
+import { BasicDie } from '../tools/BasicDie.class';
+import { FateDie } from '../tools/FateDie.class';
 import { StarWarsFFGDie } from '../tools/StarWarsFFGDie.class';
 
 @Injectable()
@@ -11,7 +15,7 @@ export class DiceService {
 		fate: 'Fate Dice',
 		fengshui: 'Feng Shui'
 	};
-	basicDieRegex: RegExp = /^(\d+)?d(\d+)$/;
+	basicDieRegex: RegExp = /^(\d+)?[dD](\d+)$/;
 
 	constructor() { }
 
@@ -32,6 +36,9 @@ export class DiceService {
 			[numDice, modifier] = (<string> dice).split('+').map((value) => parseInt(value));
 			let results = this.rollFateDice(numDice, modifier);
 			return results;
+		} else if (type === 'fengShui') {
+			let results = this.rollFengShuiDice(dice, <string> options['type']);
+			return results;
 		}
 	}
 
@@ -41,15 +48,16 @@ export class DiceService {
 			if (typeof value === 'object') {
 				for (let count = 0; count < value['num']; count++) {
 					let roll: number[] = [];
+					let die = new BasicDie(value['numFaces']);
 					do {
-						roll.push(this.rollDie(value['die']));
-					} while (options['rerollAces'] && roll.slice(-1)[0] === value['die']);
+						roll.push(die.roll());
+					} while (options['rerollAces'] && roll.slice(-1)[0] === value['numSides']);
 					if (roll.length === 1) {
 						value['results'].push(roll[0]);
 					} else {
 						value['results'].push(roll);
 					}
-					value['total'] += roll.sum();
+					value['total'] += utils.sumArray(roll);
 				}
 			}
 		});
@@ -81,7 +89,7 @@ export class DiceService {
 			return {
 				string: match['input'],
 				num: match[1] ? parseInt(match[1]) : 1,
-				die: parseInt(match[2]),
+				numSides: parseInt(match[2]),
 				results: [],
 				total: 0
 			};
@@ -98,11 +106,11 @@ export class DiceService {
 
 	private rollStarWarsFFGDice(dice: string[]): { type: string, roll: number }[] {
 		let rolls = [];
-		dice.forEach((die) => {
-			let numFaces: number = StarWarsFFGDie.getDieFaces(die).length;
+		dice.forEach((dieType) => {
+			let die = new StarWarsFFGDie(dieType);
 			rolls.push({
-				type: die,
-				roll: this.rollDie(numFaces)
+				type: dieType,
+				roll: die.roll()
 			})
 		})
 		return rolls;
@@ -110,15 +118,55 @@ export class DiceService {
 
 	private rollFateDice(numDice: number, modifier: number = 0) {
 		let results: number[] = [];
-		for (let die = 0; die < numDice; die++) {
-			results.push(this.rollDie(3) - 2);
+		let die = new FateDie();
+		for (let dieCount = 0; dieCount < numDice; dieCount++) {
+			results.push(die.roll());
 		}
 		return {
 			numDice: numDice,
 			modifier: modifier,
 			results: results,
-			total: results.sum() + modifier
+			total: utils.sumArray(results) + modifier
 		};
+	}
+
+	private rollFengShuiDice(actionValue: number, type: string = 'standard') {
+		let die: BasicDie = new BasicDie(6),
+			result: {
+				actionValue: number,
+				positive: number[],
+				negative: number[],
+				fortune: number,
+				total: number
+			} = {
+				actionValue: actionValue,
+				positive: [],
+				negative: [],
+				fortune: 0,
+				total: actionValue
+			};
+		if (type === 'standard' || type === 'fortune') {
+			let roll: number = 0;
+			do {
+				roll = die.roll();
+				result.positive.push(roll);
+			} while (roll === 6);
+			do {
+				roll = die.roll();
+				result.negative.push(roll);
+			} while (roll === 6);
+			result.total += utils.sumArray(result.positive) - utils.sumArray(result.negative);
+			if (type === 'fortune') {
+				result.fortune = die.roll();
+				result.total += result.fortune;
+			}
+		} else {
+			result.positive.push(die.roll());
+			result.negative.push(die.roll());
+			result.total += result.positive[0] - result.negative[0];
+		}
+
+		return result;
 	}
 
 }

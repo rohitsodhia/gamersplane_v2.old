@@ -13,19 +13,16 @@ export class StarWarsFFGDieComponent implements OnInit {
 	faces: {} = StarWarsFFGDie.getFaces();
 
 	@Input() die: string = null;
-	face: number = null;
-	@Input('face') set setFace(face) {
-		this.face = parseInt(face) - 1;
-	}
+	@Input() face: string[] = [];
 	faceClass: string = 'single';
 
 	constructor() { }
 
 	ngOnInit() {
-		if (this.die && this.face) {
-			if (this.faces[this.die][this.face].length === 1) {
+		if (this.die && this.face.length) {
+			if (this.face.length === 1) {
 				this.faceClass = 'single';
-			} else if (this.faces[this.die][this.face].length === 2) {
+			} else if (this.face.length === 2) {
 				this.faceClass = 'double';
 			}
 		}

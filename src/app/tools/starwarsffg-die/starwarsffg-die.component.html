@@ -6,6 +6,6 @@
 		</g>
 	</svg>
 	<ng-container *ngIf="die && face">
-		 <img *ngFor="let face of faces[die][face]; let first = first;" [src]="'/assets/images/tools/dice/starwarsffg/' + face + '.svg'" [class]="faceClass" [class.first]="first" [class.second]="!first"> 
+		 <img *ngFor="let symbol of face; let first = first;" [src]="'/assets/images/tools/dice/starwarsffg/' + symbol + '.svg'" [class]="faceClass" [class.first]="first" [class.second]="!first"> 
 	</ng-container>
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import * as utils from '../../../../utils';
+
 import { StarWarsFFGDie } from '../../StarWarsFFGDie.class';
 
 @Component({
@@ -29,8 +31,8 @@ export class StarwarsffgRollDisplayComponent implements OnInit {
 			dot_black: 0
 		}
 		this.roll.forEach(die => {
-			let dieFaces: string[][] = this.faces[die.type];
-			dieFaces[die.roll - 1].forEach((symbol) => {
+			console.log(die);
+			die.roll.forEach((symbol) => {
 				if (symbol) {
 					sums[symbol]++;
 				}
@@ -40,16 +42,16 @@ export class StarwarsffgRollDisplayComponent implements OnInit {
 		for (let symbol in sums) {
 			if (sums[symbol] !== 0) {
 				if (symbol.substr(0, 4) !== 'dot_') {
-					nonZeros.push(sums[symbol] + ' ' + symbol.ucFirst());
+					nonZeros.push(sums[symbol] + ' ' + utils.ucFirst(symbol));
 				} else {
-					nonZeros.push(sums[symbol] + ' ' + symbol.substr(4).ucFirst() + ' Dot' + (sums[symbol] > 1 ? 's' : ''));
+					nonZeros.push(sums[symbol] + ' ' + utils.ucFirst(symbol.substr(4)) + ' Dot' + (sums[symbol] > 1 ? 's' : ''));
 				}
 			}
 		}
 		this.sumString = nonZeros.join(', ');
 		let totalString: string = '';
-		if (sums.success !== sums.failure) {
-			totalString += Math.abs(sums.success - sums.failure) + ' ' + (sums.success > sums.failure ? 'Success' : 'Failure') + ', ';
+		if (sums.success + sums.triumph !== sums.failure + sums.despair) {
+			totalString += Math.abs(sums.success + sums.triumph - sums.failure + sums.despair) + ' ' + (sums.success + sums.triumph > sums.failure + sums.despair ? 'Success' : 'Failure') + ', ';
 		}
 		if (sums.advantage !== sums.threat) {
 			totalString += Math.abs(sums.advantage - sums.threat) + ' ' + (sums.advantage > sums.threat ? 'Advantage' : 'Threat') + ', ';

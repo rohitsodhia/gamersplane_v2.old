@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -9,23 +10,25 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ApiService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-	private addToken(headers: Headers) {
+	private addToken(headers: HttpHeaders) {
 		let token = localStorage.getItem('token');
 		if (token) {
-			headers.append('Authorization', 'Bearer ' + token);
+			headers = headers.set('Authorization', 'Bearer ' + token);
 		}
 		return headers;
 	}
 
-	private constructParams(params: URLSearchParams, data?: Object) {
+	private constructParams(data?: Object) {
+		// Object.keys(data).reduce((params, key) => params.set(key, data[key]), new HttpParams());
+		let params = new HttpParams();
 		for (let key in data) {
 			if (typeof data[key] !== 'object') {
-				params.set(key, data[key]);
+				params = params.set(key, data[key]);
 			} else {
 				for (let oKey in data[key]) {
-					params.set(key + '[' + oKey + ']', data[key][oKey]);
+					params = params.set(key + '[' + oKey + ']', data[key][oKey]);
 				}
 			}
 		}
@@ -33,54 +36,47 @@ export class ApiService {
 		return params;
 	}
 
-	get(path: string, data?: Object): Observable<Response> {
-		let headers = new Headers();
+
+	get<T = any>(path: string, data?: Object): Observable<T> {
+		let headers = new HttpHeaders();
 		headers = this.addToken(headers);
-		let params = new URLSearchParams();
-		params = this.constructParams(params, data);
-		let options = new RequestOptions({
-			headers: headers,
-			search: params
-		});
 		return this.http
-			.get(environment.apiDomain + path, options)
+			.get<T>(environment.apiDomain + path, {
+				headers: headers,
+				params: this.constructParams(data)
+			});
 	}
 
-	post(path, data): Observable<Response> {
-		let headers = new Headers({
+	post<T = any>(path, data): Observable<T> {
+		let headers = new HttpHeaders({
 			'Content-Type': 'application/x-www-form-urlencoded'
 		});
 		headers = this.addToken(headers);
-		let options = new RequestOptions({
-			headers: headers
-		});
 		return this.http
-			.post(environment.apiDomain + path, JSON.stringify(data), options)
+			.post<T>(environment.apiDomain + path, JSON.stringify(data), {
+				headers: headers,
+			});
 	}
 
-	delete(path: string, data?: Object): Observable<Response> {
-		let headers = new Headers();
+	delete<T = any>(path: string, data?: Object): Observable<T> {
+		let headers = new HttpHeaders();
 		headers = this.addToken(headers);
-		let params = new URLSearchParams();
-		params = this.constructParams(params, data);
-		let options = new RequestOptions({
-			headers: headers,
-			search: params
-		});
 		return this.http
-			.delete(environment.apiDomain + path, options)
+			.delete<T>(environment.apiDomain + path, {
+				headers: headers,
+				params: this.constructParams(data)
+			});
 	}
 
-	patch(path: string, data?: Object): Observable<Response> {
-		let headers = new Headers({
+	patch<T = any>(path: string, data?: Object): Observable<T> {
+		let headers = new HttpHeaders({
 			'Content-Type': 'application/x-www-form-urlencoded'
 		});
 		headers = this.addToken(headers);
-		let options = new RequestOptions({
-			headers: headers
-		});
 		return this.http
-			.patch(environment.apiDomain + path, JSON.stringify(data), options);
+			.patch<T>(environment.apiDomain + path, JSON.stringify(data), {
+				headers: headers,
+			});
 	}
 
 }

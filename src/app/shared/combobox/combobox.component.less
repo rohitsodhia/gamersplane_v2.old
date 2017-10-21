@@ -1,0 +1,91 @@
+@import '../../../variables.less';
+
+.combobox {
+	position: relative;
+	display: inline-block;
+	z-index: 5000;
+
+	&.focused {
+	}
+
+	input[type="text"] {
+		width: 100%;
+		padding-right: 24px;
+		text-align: left;
+
+	}
+
+	&.resultsOpen {
+		z-index: 5001;
+
+		input {
+			-webkit-border-bottom-right-radius: 0;
+			-webkit-border-bottom-left-radius: 0;
+			-moz-border-radius-bottomright: 0;
+			-moz-border-radius-bottomleft: 0;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	&.autocomplete {
+		input {
+			width: 100%;
+		}
+	}
+
+	.dropdown {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 24px;
+
+		svg {
+			width: 14px;
+			height: 10px;
+
+			path {
+				fill: #A00;
+			}
+		}
+	}
+
+	.results {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		max-height: 115px;
+		width: 100%;
+		box-sizing: border-box;
+		overflow-y: auto;
+		background-color: #FFF;
+		border: 1px solid #900;
+		border-top: none;
+		border-left-color: #400;
+
+		a {
+			display: block;
+			padding: 3px 5px;
+			background: @input-bg;
+			text-align: left;
+
+			&, &:visited, &:active, &:hover {
+				color: #000;
+			}
+
+			&:hover, &.selected {
+				background: #FCC;
+			}
+		}
+	}
+
+	&.settingUp {
+		.results {
+			display: block !important;
+		}
+	}
+}

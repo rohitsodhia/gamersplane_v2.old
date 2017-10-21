@@ -1,0 +1,63 @@
+h2 {
+	margin-top: 0;
+}
+
+form {
+	width: 400px;
+	text-align: center;
+}
+
+.row {
+	position: relative;
+	margin: .8em 0;
+}
+
+.info, .error {
+	position: absolute;
+	top: 0;
+	left: 355px;
+	width: 220px;
+	padding: 0 6px;
+	font-size: .8em;
+	text-align: left;
+}
+
+.focused {
+	.info, .error {
+		z-index: 10001;
+	}
+}
+
+.info {
+	border: 1px solid #33F;
+	background-color: #BBF;
+
+	&.hasError {
+		top: 20px;
+	}
+}
+
+.error {
+	border: 1px solid #F33;
+	background-color: #FBB;
+}
+
+.notice {
+	margin: .5em 0;
+	text-align: left;
+}
+
+label {
+	width: 120px;
+	margin-right: 10px;
+	text-align: right;
+}
+
+input {
+	width: 200px;
+}
+
+#recaptcha {
+	display: flex;
+	justify-content: center;
+}

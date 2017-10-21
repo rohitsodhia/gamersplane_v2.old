@@ -1,0 +1,317 @@
+&, td, input, select, textarea {
+	font-size: 14px;
+	font-family: 'OpenSans_Regular', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	color: #000;
+	line-height: 1.3em;
+}
+
+#top {
+	background: url('/assets/images/landing_top_bg.jpg') top center no-repeat;
+}
+
+#top_content {
+	padding-top: 120px;
+
+	header {
+		padding: 30px 0 30px 60px;
+
+		h1, h2 {
+			margin: 0;
+			font-family: 'OpenSans_Regular';
+			color: #FFF;
+			text-align: left;
+			line-height: 1em;
+		}
+
+		h1 {
+			margin-bottom: .5em;
+			font-size: 40px;
+			font-weight: normal;
+		}
+
+		h2 {
+			margin-left: 50px;
+			font-size: 26px;
+		}
+	}
+}
+
+#top_whiteBox {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	margin-bottom: 30px;
+	padding: 20px 10px;
+	background: #FFF;
+
+	& > * {
+		display: inline-block;
+		width: 560px;
+		padding: 0 20px;
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 0;
+			font-weight: normal;
+			text-align: center;
+
+			& > div {
+				padding: 5px 8px;
+			}
+		}
+	}
+}
+
+#systemSearch {
+	padding: 6px 12px;
+	border: 2px solid #BBB;
+	border-top: 0;
+
+	& > * {
+		vertical-align: middle;
+	}
+
+	.sprite {
+		margin-right: 10px;
+	}
+
+	::ng-deep .combobox {
+		width: 470px;
+
+		input {
+			border: 1px solid #FFF;
+			border-radius: 0;
+			background: none;
+		}
+
+		&.resultsOpen input, .results {
+			border-color: #999;
+		}
+
+		&.resultsOpen input {
+			border-bottom-color: #CCC;
+		}
+
+		.results {
+			border-top: none;
+
+			a {
+				padding: 6px 9px;
+				background: none;
+
+				&:hover, &.selected {
+					background: #FCC;
+				}
+			}
+		}
+	}
+}
+
+#latestGames ul {
+	height: 162px;
+	margin-left: 0;
+	list-style: none;
+}
+
+#gameLoadSpinner {
+	padding: 10px 0;
+	text-align: center;
+}
+
+.game {
+	padding: 8px 30px;
+	border-top: 1px solid #CCC;
+
+	&.first {
+		border-top: none;
+	}
+
+	.title {
+		margin-bottom: 5px;
+
+		a {
+			font-weight: bold;
+		}
+	}
+
+	.info {
+		margin-left: 20px;
+	}
+
+	.system {
+		text-decoration: underline;
+	}
+}
+
+#whatIs {
+	& > * {
+		float: left;
+		margin: 40px 0;
+	}
+}
+
+#whatIs_logos {
+	position: relative;
+	height: 410px;
+	width: 540px;
+	padding: 0 30px;
+
+	& > * {
+		position: absolute;
+	}
+}
+
+#whatIs_dnd5 {
+	top: 40px;
+	left: 34px;
+	width: 309px;
+}
+
+#whatIs_thestrange {
+	top: 17px;
+	left: 387px;
+	width: 167px;
+}
+
+#whatIs_pathfinder {
+	top: 126px;
+	left: 82px;
+	width: 195px;
+}
+
+#whatIs_starwarsffg {
+	top: 102px;
+	left: 336px;
+	width: 173px;
+}
+
+#whatIs_13thage {
+	top: 227px;
+	left: 142px;
+	width: 89px;
+}
+
+#whatIs_numenera {
+	top: 222px;
+	left: 270px;
+	width: 280px;
+}
+
+#whatIs_shadowrun5 {
+	top: 331px;
+	left: 39px;
+	width: 191px;
+}
+
+#whatIs_fate {
+	top: 325px;
+	left: 286px;
+	width: 113px;
+}
+
+#whatIs_savageworlds {
+	top: 295px;
+	left: 433px;
+	width: 121px;
+}
+
+#whatIs_text {
+	width: 570px;
+
+	h2 {
+		margin-bottom: .5em;
+		font-family: AgencyFB;
+		font-size: 48px;
+		line-height: 1em;
+	}
+
+	p {
+		margin: 1.2em 0 0;
+		line-height: 1.4em;
+	}
+}
+
+#features {
+	padding: 75px 0 55px;
+	background-color: #DDD;
+
+	.contentContainer{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		& > * {
+			position: relative;
+			width: 380px;
+			height: 220px;
+			padding: 50px 30px 0;
+			box-sizing: border-box;
+			border: 1px solid #DBB;
+			background-color: #FFF;
+		}
+	}
+
+	.icon {
+		position: absolute;
+		top: -36px;
+		left: 190px;
+		width: 72px;
+		height: 72px;
+		margin-left: -36px;
+		background-color: #C31D29;
+		border-radius: 36px;
+		text-align: center;
+		line-height: 68px;
+	}
+
+	h3 {
+		margin-bottom: 1em;
+		font-family: OpenSans_Regular;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	p {
+		margin: 0;
+		font-size: 1.2em;
+		line-height: 1.5em;
+		text-align: center;
+	}
+}
+
+#features_tools, #features_library, #features_sheets {
+	span {
+		display: inline-block;
+		background: url('/assets/images/sprites.png') top left no-repeat;
+		vertical-align: middle;
+	}
+}
+
+#features_tools {
+	span {
+		width: 42px;
+		height: 40px;
+		margin-right: 2px;
+		background-position: -73px -56px;
+	}
+}
+
+
+#features_library {
+	span {
+		width: 40px;
+		height: 31px;
+		background-position: -115px -56px;
+	}
+}
+
+#features_sheets {
+	span {
+		width: 29px;
+		height: 40px;
+		margin-left: 2px;
+		background-position: -155px -56px;
+	}
+}

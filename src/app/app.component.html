@@ -1,6 +1,21 @@
 <gp-header></gp-header>
-<div id="content"><div class="clearfix bodyContainer">
+<div id="content" [ngClass]="rootClasses"><div class="clearfix contentContainer">
 	<router-outlet></router-outlet>
 </div></div>
 <gp-footer></gp-footer>
 <gp-page-load-overlay></gp-page-load-overlay>
+<gp-modal name="register">
+	<ng-template>
+		<ng-container [ngSwitch]="portalState">
+			<gp-register *ngSwitchCase="'register'" (success)="userRegistered($event)"></gp-register>
+			<div id="registerSuccess" *ngSwitchCase="'registerSuccess'">
+				<h1 gp-skew class="headerbar">Thank you for registering, {{registeredUser.username}}!</h1>
+				<div gp-hbMargin>
+					<p>An email has been sent to you with instructions on how to activate your account.</p>
+					<p>Please make sure <strong>contact@gamersplane.com</strong> is whitelisted on your email account. If you do not recieve an email in your inbox, please check your spam folder.</p>
+					<p>If you still haven't gotten a mail, you can try <a href="/register/resendActivation/">resending an activation email</a>.</p>
+				</div>
+			</div>
+		</ng-container>
+	</ng-template>
+</gp-modal>

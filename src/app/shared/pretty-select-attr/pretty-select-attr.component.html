@@ -1,0 +1,7 @@
+<div class="wrapper" [class.open]="showOptions">
+	<ul class="options">
+		<li *ngFor="let option of options" (click)="selectOption(option)">{{option.label}}</li>
+	</ul>
+	<div class="current" (click)="toggleOptions()">{{value.label}}</div>
+	<div class="dropdown" (click)="toggleOptions()"></div>
+</div>

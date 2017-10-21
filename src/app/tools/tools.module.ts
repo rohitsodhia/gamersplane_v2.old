@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ToolsRoutingModule } from './tools-routing.module';
-import { DisplayModule } from '../shared/display.module';
+import { SharedModule } from './../shared/shared.module';
 
 import { DiceService } from '../shared/dice.service';
 
@@ -13,12 +13,13 @@ import { BasicRollDisplayComponent } from './roll-display/basic-roll-display/bas
 import { StarwarsffgRollDisplayComponent } from './roll-display/starwarsffg-roll-display/starwarsffg-roll-display.component';
 import { FateRollDisplayComponent } from './roll-display/fate-roll-display/fate-roll-display.component';
 import { FateDieComponent } from './fate-die/fate-die.component';
+import { FengShuiDisplayComponent } from './roll-display/feng-shui-display/feng-shui-display.component';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		ToolsRoutingModule,
-		DisplayModule
+		SharedModule
 	],
 	declarations: [
 		DiceComponent,
@@ -28,6 +29,7 @@ import { FateDieComponent } from './fate-die/fate-die.component';
 		StarwarsffgRollDisplayComponent,
 		FateRollDisplayComponent,
 		FateDieComponent,
+		FengShuiDisplayComponent,
 	],
 	providers: [
 		DiceService

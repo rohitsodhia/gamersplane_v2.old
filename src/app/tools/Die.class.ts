@@ -1,7 +1,7 @@
 export abstract class Die {
 
 	protected sides: number;
-	protected result: number | string = 0;
+	protected result: number | string | (number | string)[] = 0;
 
 	constructor(sides: number) {
 		this.sides = sides;
@@ -11,6 +11,6 @@ export abstract class Die {
 		return this.result;
 	}
 
-	abstract roll();
+	abstract roll(): number | string | (number | string)[];
 
 }

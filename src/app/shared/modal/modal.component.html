@@ -1,0 +1,13 @@
+<div (click)="clickedOverlay($event)" *ngIf="state$ | async" class="overlay">
+	<div class="wrapper">
+		<gp-trapezoid id="close" (click)="closeModal()" direction="up" red>
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="20.798px" height="20.846px" viewBox="0 0 20.798 20.846" enable-background="new 0 0 20.798 20.846" xml:space="preserve">
+				<g>
+					<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#FFF" points="0.708,16.399 6.708,10.399 0.708,4.397 4.398,0.707 10.399,6.708 16.399,0.707 20.091,4.398 14.091,10.399 20.091,16.399 16.399,20.09 10.399,14.089 4.398,20.09" />
+				</g>
+			</svg>
+		</gp-trapezoid>
+		<ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
+	</div>
+</div>

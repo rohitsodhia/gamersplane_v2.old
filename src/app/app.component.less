@@ -1,8 +1,22 @@
 #content {
-	padding-top: 125px;
 	background-color: #FFF;
 
-	.bodyContainer {
+	&.fullWidth {
+		.contentContainer {
+			width: 100%;
+			padding-top: 0;
+		}
+	}
+
+	.contentContainer {
 		padding: 10px 0;
 	}
+
+	&.underHeader {
+		padding-top: 0;
+	}
+}
+
+#registerSuccess {
+	width: 600px;
 }

@@ -12,7 +12,9 @@ export class BasicDie extends Die {
 	}
 
 	roll() {
-		Math.floor(Math.random() * this.sides) + 1;
+		this.result = Math.floor(Math.random() * this.sides) + 1;
+
+		return this.result;
 	}
 
 }

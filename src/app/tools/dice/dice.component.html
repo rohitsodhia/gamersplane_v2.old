@@ -47,7 +47,7 @@
 			<div *ngFor="let typeGroup of starWarsFFGDisplay" class="clearfix">
 				<a *ngFor="let type of typeGroup; let first = first;" (click)="addStarWarsFFGDie(type)" class="addDiceLink" [ngClass]="type">
 					<gp-starwarsffg-die [die]="type"></gp-starwarsffg-die>
-					<span>{{type.ucFirst()}}</span>
+					<span>{{utils.ucFirst(type)}}</span>
 				</a>
 			</div>
 			<div class="alignCenter">
@@ -70,7 +70,8 @@
 			<div class="clearfix">
 				<label for="fengshui_av">Action Value: </label>
 				<input id="fengshui_av" type="number" value="0" min="0" step="1">
-				<select id="fengshui_type" name="fengshui_type">
+				<rs-pretty-select [options]="diceTypes" (valueChange)="changeDiceType($event)"></rs-pretty-select>
+				<select id="fengshui_type" name="fengshui_type" rs-pretty-select>
 					<option value="standard">Standard</option>
 					<option value="fortune">Fortune</option>
 					<option value="closed">Closed</option>

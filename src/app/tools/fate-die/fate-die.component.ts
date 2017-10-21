@@ -19,7 +19,6 @@ export class FateDieComponent implements OnInit {
 		} else if (face >= -1 && face <= 1) {
 			this.face = this.faceMap[face];
 		}
-		console.log(face, this.face);
 	}
 
 	constructor() { }

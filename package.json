@@ -1,10 +1,10 @@
 {
-  "name": "gamers-plane-ng",
+  "name": "gamers-plane",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl 1 --ssl-key 'C:\\www\\GamersPlaneNG\\ssl\\gamersplane.local.key' --ssl-cert 'C:\\www\\GamersPlaneNG\\ssl\\gamersplane.local.crt'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,12 +21,15 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/grecaptcha": "^2.0.33",
     "core-js": "^2.4.1",
+    "ng-recaptcha": "^3.0.1",
     "rxjs": "^5.1.0",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.1.3",
+    "@angular/cli": "^1.4.7",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
@@ -43,6 +46,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.4.0"
   }
 }
