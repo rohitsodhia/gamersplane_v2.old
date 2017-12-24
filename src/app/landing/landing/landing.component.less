@@ -36,10 +36,17 @@
 	}
 }
 
+@media (max-width: 1023px) {
+	#top_content {
+		padding-top: 70px;
+	}
+}
+
 #top_whiteBox {
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	// align-items: flex-start;
+	align-items: center;
 	margin-bottom: 30px;
 	padding: 20px 10px;
 	background: #FFF;
@@ -48,6 +55,7 @@
 		display: inline-block;
 		width: 560px;
 		padding: 0 20px;
+		box-sizing: border-box;
 
 		h2 {
 			margin-top: 0;
@@ -58,6 +66,27 @@
 			& > div {
 				padding: 5px 8px;
 			}
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	#top_whiteBox {
+		padding-right: 0;
+		padding-left: 0;
+		
+		& > * {
+			width: 50%;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	#top_whiteBox {
+		display: block;
+
+		& > * {
+			width: 100%;
 		}
 	}
 }
@@ -76,7 +105,7 @@
 	}
 
 	::ng-deep .combobox {
-		width: 470px;
+		width: 100%;
 
 		input {
 			border: 1px solid #FFF;
@@ -143,21 +172,67 @@
 	}
 }
 
-#whatIs {
-	& > * {
-		float: left;
-		margin: 40px 0;
+#entry {
+	p, div {
+		text-align: center;
 	}
+
+	div {
+		margin: .5em 0;
+	}
+
+	.cta {
+		margin-bottom: 1em;
+		font-weight: bold;
+		font-size: 2em;
+		line-height: 1em;
+	}
+}
+
+@media (max-width: 767px) {
+	#entry {
+		.cta {
+			margin-bottom: .5em;
+		}
+	}
+
+	#topPortalLinks {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		& > div {
+			margin: 0 20px;
+		}
+	}
+}
+
+#whatIs {
+	display: flex;
+
+	img {
+		width: 100%;
+	}
+}
+
+#whatIs_logos, #whatIs_text {
+	display: block;
+	margin: 40px 0;
 }
 
 #whatIs_logos {
 	position: relative;
 	height: 410px;
 	width: 540px;
+	flex: 0 0 auto;
 	padding: 0 30px;
 
 	& > * {
 		position: absolute;
+	}
+
+	img {
+		vertical-align: middle;
 	}
 }
 
@@ -215,8 +290,34 @@
 	width: 121px;
 }
 
+@media (max-width: 1023px) {
+	#whatIs {
+		display: block;
+	}
+
+	#whatIs_logos {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		flex-wrap: wrap;
+		height: 100px;
+		width: 100%;
+		padding: 0;
+		overflow: hidden;
+
+		& > * {
+			position: relative;
+			display: inline-block;
+			top: 0;
+			left: 0;
+			height: 100px;
+			line-height: 100px;
+		}
+	}
+}
+
 #whatIs_text {
-	width: 570px;
+	flex-grow: 1;
 
 	h2 {
 		margin-bottom: .5em;
@@ -238,13 +339,12 @@
 	.contentContainer{
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 
 		& > * {
 			position: relative;
-			width: 380px;
-			height: 220px;
-			padding: 50px 30px 0;
+			width: 32%;
+			max-width: 380px;
+			padding: 50px 30px 40px;
 			box-sizing: border-box;
 			border: 1px solid #DBB;
 			background-color: #FFF;
@@ -254,7 +354,7 @@
 	.icon {
 		position: absolute;
 		top: -36px;
-		left: 190px;
+		left: 50%;
 		width: 72px;
 		height: 72px;
 		margin-left: -36px;
@@ -279,6 +379,15 @@
 		line-height: 1.5em;
 		text-align: center;
 	}
+}
+
+@media (max-width: 1200px) {
+	#features {
+		.contentContainer {
+			padding: 0 1%;
+			justify-content: space-around;
+		}
+	}	
 }
 
 #features_tools, #features_library, #features_sheets {

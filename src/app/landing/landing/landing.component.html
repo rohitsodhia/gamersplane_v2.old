@@ -28,13 +28,19 @@
 				</div>
 			</div>
 			<div id="entry">
+				<p class="cta">Get into a game today!</p>
+				<div id="topPortalLinks">
+					<div><button (click)="openPortalModal('register')" gp-skew class="fancyButton">Register</button></div>
+					<div>- or -</div>
+					<div><button (click)="openPortalModal('login')">Login</button></div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div id="whatIs" class="contentContainer clearfix">
-	<div id="whatIs_logos">
-		<img *ngFor="let system of whatIsLogos" [id]="'whatIs_' + system" [src]="'/assets/images/logos/' + system + '.png'">
+	<div id="whatIs_logos" *ngIf="(screenWidth | async) >= 425">
+		<div *ngFor="let system of whatIsLogos" [id]="'whatIs_' + system"><img [src]="'/assets/images/logos/' + system + '.png'"></div>
 	</div>
 	<div id="whatIs_text">
 		<h2>What is Play-by-Post?</h2>

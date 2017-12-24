@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserLinkComponent implements OnInit {
 
-	@Input() user: {};
+	@Input() user: { userId: number, username: string };
 
 	constructor() { }
 

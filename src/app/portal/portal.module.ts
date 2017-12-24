@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { RecaptchaModule } from 'ng-recaptcha';
+
 import { PortalRoutingModule } from './portal-routing.module';
 import { SharedModule } from '../shared/shared.module';
 // import { RecaptchaModule } from '../shared/recaptcha/recaptcha.module';
@@ -18,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 		ReactiveFormsModule,
 		SharedModule,
 		// RecaptchaModule,
+		RecaptchaModule
 	],
 	declarations: [
 		RegisterComponent,
@@ -25,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 	],
 	exports: [
 		RegisterComponent,
+		LoginComponent,
 	],
 	providers: [
 		PortalModalService

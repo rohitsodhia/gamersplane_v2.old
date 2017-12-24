@@ -4,8 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import { SharedModule } from './shared/shared.module';
+import { PageLoadOverlayModule } from './shared/page-load-overlay/page-load-overlay.module';
 import { ModalModule } from './shared/modal/modal.module';
 // import { RecaptchaModule } from './shared/recaptcha/recaptcha.module';
 import { PortalModule } from './portal/portal.module';
@@ -14,17 +16,17 @@ import { LandingModule } from './landing/landing.module';
 import { ToolsModule } from './tools/tools.module';
 
 import { HbMarginService } from './shared/hb-margin.service';
-import { PageLoadOverlayService } from './shared/page-load-overlay/page-load-overlay.service';
 import { ApiService } from './shared/api.service';
+import { ScreenWidthService } from './shared/screen-width.service';
+import { RootClassesService } from './shared/root-classes.service';
 import { GlobalResolverService } from './shared/global-resolver.service';
+import { ReferralLinksService } from './shared/referral-links.service';
 import { UserService } from './shared/user.service';
 import { AuthService } from './shared/auth.service';
-import { RootClassesService } from './shared/root-classes.service';
 import { SystemService } from './shared/system.service';
 import { GameService } from './shared/game.service';
 
 import { AppComponent } from './app.component';
-import { PageLoadOverlayComponent } from './shared/page-load-overlay/page-load-overlay.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { LogoComponent } from './shared/logo/logo.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -36,8 +38,11 @@ import { LinksComponent } from './links/links.component';
 		BrowserAnimationsModule,
 		RouterModule,
 		HttpClientModule,
+
+		RecaptchaModule.forRoot(),
 		
 		SharedModule,
+		PageLoadOverlayModule,
 		ModalModule,
 		// RecaptchaModule,
 		PortalModule,
@@ -47,7 +52,6 @@ import { LinksComponent } from './links/links.component';
 	],
 	declarations: [
 		AppComponent,
-		PageLoadOverlayComponent,
 		HeaderComponent,
 		LogoComponent,
 		FooterComponent,
@@ -67,11 +71,12 @@ import { LinksComponent } from './links/links.component';
 			multi: true
 		},
 		HbMarginService,
-		PageLoadOverlayService,
 		ApiService,
-		GlobalResolverService,
-		AuthService,
+		ScreenWidthService,
 		RootClassesService,
+		GlobalResolverService,
+		ReferralLinksService,
+		AuthService,
 		UserService,
 		SystemService,
 		GameService,

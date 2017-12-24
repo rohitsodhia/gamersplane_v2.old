@@ -1,10 +1,13 @@
-import { ModalService } from './../modal/modal.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from 'app/shared/auth.service';
 
-import { slideHeight } from '../animations';
+import { PortalModalService } from 'app/portal/portal-modal.service';
+import { ScreenWidthService } from 'app/shared/screen-width.service';
+
+import { slideHeight } from 'app/shared/animations';
 
 @Component({
 	selector: 'gp-header',
@@ -18,11 +21,14 @@ export class HeaderComponent implements OnInit {
 
 	loggedIn: boolean = false;
 	toggleHeight: {} = {};
-	currentlyOpen: { menu: any, target: any } = { menu: null, target: null };
+	private currentlyOpen: { menu: any, target: any } = { menu: null, target: null };
+	screenWidth: Observable<number>;
+	mobileOpen: boolean = false;
 
 	constructor(
 		private router: Router,
-		private modalService: ModalService,
+		private screenWidthService: ScreenWidthService,
+		private portalModalService: PortalModalService,
 		private authService: AuthService,
 	) {
 		this.toggleHeight = {
@@ -31,6 +37,7 @@ export class HeaderComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.screenWidth = this.screenWidthService.get();
 		this.authService.loggedIn().subscribe((loggedIn: boolean) => this.loggedIn = loggedIn);
 	}
 
@@ -58,8 +65,16 @@ export class HeaderComponent implements OnInit {
 	// 	}
 	// }
 
-	register() {
-		this.modalService.openModal('register');
+	openPortalModal(state: 'register' | 'login') {
+		this.portalModalService.openPortal(state);
+	}
+
+	openMobileMenu() {
+		this.mobileOpen = true;
+	}
+
+	closeMobileMenu() {
+		this.mobileOpen = false;
 	}
 
 }

@@ -23,7 +23,10 @@ export class SystemService {
 				systems.some((system) => this.systems.find((eSystem) => system === eSystem._id).publisher === undefined)
 			)
 		) {
-			if (systems.length === 0) {
+			if (options === undefined) {
+				options = [];
+			}
+			if (systems === undefined || systems.length === 0) {
 				options['all'] = true;
 			} else {
 				options['systems'] = systems.join(',');

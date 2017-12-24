@@ -1,3 +1,17 @@
-<p>
-  login works!
-</p>
+<form [formGroup]="login" (submit)="submitLogin()">
+	<h2 class="headerbar hbDark" hbmGroup="hbd" gp-skew>Login</h2>
+	<div gp-hbMargin="hbd">
+		<div class="row">
+			<label for="user">Username/Email</label> <input id="user" type="text" formControlName="user">
+		</div>
+		<div class="row">
+			<label for="password">Password</label> <input id="password" type="password" formControlName="password">
+		</div>
+		<div class="row center">
+			<button gp-skew class="fancyButton" [disabled]="login.invalid">Login</button>
+		</div>
+	</div>
+
+	<p><a (click)="openRegister()">Don't have an account? Register for free!</a></p>
+	<p><a (click)="accountRecovery()">Trouble logging in?</a></p>
+</form>

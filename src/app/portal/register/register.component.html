@@ -43,6 +43,7 @@
 		</ng-container>
 		<div id="recaptcha" class="row">
 			<!-- <rs-recaptcha (resolved)="human = !!$event" siteKey="6LcT8gsTAAAAALlRVGdtM9iansESdnIdeCUIwoqG"></rs-recaptcha> -->
+			<re-captcha (resolved)="human = !!$event" siteKey="6LcT8gsTAAAAALlRVGdtM9iansESdnIdeCUIwoqG"></re-captcha>
 		</div>
 		<div class="row center">
 			<button gp-skew class="fancyButton" [disabled]="register.invalid || !human || emailTaken || usernameTaken">Register</button>

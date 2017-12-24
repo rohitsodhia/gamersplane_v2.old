@@ -5,6 +5,6 @@
 
 export const environment = {
 	production: false,
-	apiDomain: '//api.gamersplane.local',
+	apiDomain: 'https://api.gamersplane.local',
 	cookieDomain: '*.gamersplane.local'
 };

@@ -57,7 +57,7 @@
 		"component": {},
 		"serve": {
 			"host": "gamersplane.local",
-			"port": 443
+			"port": 80
 		}
 	}
 }

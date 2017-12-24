@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
 		private rootClassesService: RootClassesService,
 		private portalModalService: PortalModalService,
 	) {
-		this.portalModalService.setState('register');
 		this.portalModalService.getState().subscribe(state => this.portalState = state);
 	}
 

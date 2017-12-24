@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from '../shared.module';
+
 import { PageLoadOverlayService } from './page-load-overlay.service';
 
-import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { PageLoadOverlayComponent } from './page-load-overlay.component';
 
 @NgModule({
 	imports: [
-		CommonModule
+		CommonModule,
+		SharedModule
 	],
 	declarations: [
-		LoadingSpinnerComponent,
 		PageLoadOverlayComponent,
 	],
 	exports: [
-		LoadingSpinnerComponent,
 		PageLoadOverlayComponent,
 	],
 	providers: [

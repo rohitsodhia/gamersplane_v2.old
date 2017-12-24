@@ -1,5 +1,6 @@
-export interface RegisterPostAPIResponse {
-	success: boolean;
+import { APIResponse } from '../../shared/api-response.interface';
+
+export interface RegisterPostAPIResponse extends APIResponse {
 	errors?: string[];
 	user?: {
 		userID: number,

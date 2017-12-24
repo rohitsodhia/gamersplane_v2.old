@@ -4,7 +4,7 @@
 </div></div>
 <gp-footer></gp-footer>
 <gp-page-load-overlay></gp-page-load-overlay>
-<gp-modal name="register">
+<gp-modal name="portal">
 	<ng-template>
 		<ng-container [ngSwitch]="portalState">
 			<gp-register *ngSwitchCase="'register'" (success)="userRegistered($event)"></gp-register>
@@ -16,6 +16,7 @@
 					<p>If you still haven't gotten a mail, you can try <a href="/register/resendActivation/">resending an activation email</a>.</p>
 				</div>
 			</div>
+			<gp-login *ngSwitchCase="'login'" (success)="userLoggedIn($event)"></gp-login>
 		</ng-container>
 	</ng-template>
 </gp-modal>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ReferralLinksService } from '../referral-links.service';
+
+import { ReferralLink } from '../referral-link.interface';
 
 @Component({
 	selector: 'gp-footer',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-	constructor() { }
+	referralLinks: ReferralLink[] = [];
+
+	constructor(
+		private referralLinksService: ReferralLinksService
+	) { }
 
 	ngOnInit() {
+		this.referralLinksService.get().subscribe(links => this.referralLinks = links);
 	}
 
 }

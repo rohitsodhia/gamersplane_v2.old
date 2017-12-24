@@ -5,6 +5,7 @@ import * as utils from '../../../utils';
 
 import { RegisterPostAPIResponse } from './register-post-api-response.interface';
 
+// import { RecaptchaService } from 'app/shared/recaptcha/recaptcha.service';
 import { UserService } from '../../shared/user.service';
 
 
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
+		// private recaptchaService: RecaptchaService,
 		private userService: UserService,
 	) { }
 
@@ -36,7 +38,7 @@ export class RegisterComponent implements OnInit {
 			],
 			username: [
 				'',
-				[Validators.required, Validators.minLength(4), Validators.maxLength(24), Validators.pattern(/[a-z][a-z0-9\._]{3,23}/i)]
+				[Validators.required, Validators.minLength(4), Validators.maxLength(24), Validators.pattern(utils.usernameRegex)]
 			],
 			password: this.formBuilder.group({
 				password: [
@@ -89,7 +91,7 @@ export class RegisterComponent implements OnInit {
 			email: this.register.get('email').value,
 			username: this.register.get('username').value,
 			password: this.register.get('password').get('password').value
-		}).subscribe((data: RegisterPostAPIResponse) => {
+		}).subscribe((data) => {
 			if (data.success) {
 				this.success.emit(data.user);
 			}

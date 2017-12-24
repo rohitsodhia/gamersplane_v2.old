@@ -40,7 +40,7 @@
 
 body, td, input, select, textarea {
 	font-size: 13px;
-	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-family: 'OpenSans_Regular', 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	color: #000;
 	line-height: 1.3em;
 }
@@ -52,6 +52,15 @@ body {
 .contentContainer {
 	width: 1200px;
 	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+	.contentContainer {
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 }
 
 p {

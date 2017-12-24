@@ -3,6 +3,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
 
+import { RegisterPostAPIResponse } from '../portal/register/register-post-api-response.interface';
+import { LoginGetAPIResponse } from '../portal/login/login-get-api-response';
+
 @Injectable()
 export class UserService {
 
@@ -22,8 +25,12 @@ export class UserService {
 		return this.apiService.get('/users/exists', { username: username });
 	}
 
-	register(data: {}) {
+	register(data: {}): Observable<RegisterPostAPIResponse> {
 		return this.apiService.post('/users/register', data);
+	}
+
+	login(user: string, password: string): Observable<LoginGetAPIResponse> {
+		return this.apiService.get('/auth/validateCredentials', { user: user, password: password });
 	}
 
 }

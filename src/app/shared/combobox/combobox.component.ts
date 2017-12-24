@@ -60,6 +60,12 @@ export class ComboboxComponent implements OnInit {
 	showDropdown: boolean = false;
 	@Output() public change = new EventEmitter();
 
+
+
+	usingAutocomplete: boolean = false;
+
+
+
 	@ViewChild('results') results: ElementRef;
 
 	@HostListener('document:click', ['$event.target']) public onClick(targetElement) {

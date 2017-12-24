@@ -31,6 +31,25 @@ header {
 	box-shadow: 0 1px 20px 1px #777;
 }
 
+#menuWrapper {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-grow: 2;
+}
+
+#mobileMenuIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 40px;
+	background-color: #FFF;
+	border: 2px solid #000;
+	border-radius: 22px;
+	cursor: pointer;
+}
+
 #mainMenu {
 	flex-grow: 1;
 	text-align: right;
@@ -151,5 +170,48 @@ header {
 #login {
 	a, a:visited, a:hover {
 		color: #BC2025
+	}
+}
+
+#mobileMenuOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+@media (max-width: 1023px) {
+	#mainMenu {
+		position: fixed;
+		z-index: 10001;
+		top: 0;
+		right: 0;
+		width: 200px;
+		height: 100%;
+		background-color: #FFF;
+
+		li {
+			display: block;
+		}
+	}
+
+	#register {
+		margin-top: 7px;
+		margin-left: 0;
+		padding-top: 7px;
+		padding-left: 0;
+		border-top: 2px solid #999;
+		border-left: none;
+	}
+}
+
+@media (max-width: 1023px) {
+	header {
+		&, & > * {
+			height: 70px;
+		}
 	}
 }
