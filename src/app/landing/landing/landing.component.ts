@@ -9,7 +9,7 @@ import { SystemService } from 'app/shared/system.service';
 import { GameService } from 'app/shared/game.service';
 
 @Component({
-	selector: 'app-landing',
+	selector: 'gp-landing',
 	templateUrl: './landing.component.html',
 	styleUrls: ['./landing.component.less']
 })

@@ -5,6 +5,12 @@
 	line-height: 1.3em;
 }
 
+@media (max-width: 480px) {
+	.contentContainer {
+		padding: 0;
+	}
+}
+
 #top {
 	background: url('/assets/images/landing_top_bg.jpg') top center no-repeat;
 }
@@ -39,6 +45,14 @@
 @media (max-width: 1023px) {
 	#top_content {
 		padding-top: 70px;
+	}
+}
+
+@media (max-width: 480px) {
+	#top_content {
+		header {
+			padding: 20px 10px;
+		}
 	}
 }
 
@@ -207,6 +221,14 @@
 	}
 }
 
+@media (max-width: 480px) {
+	#topPortalLinks {
+		& > div {
+			margin: 0 10px;
+		}
+	}
+}
+
 #whatIs {
 	display: flex;
 
@@ -316,6 +338,18 @@
 	}
 }
 
+@media (max-width: 768px) {
+	#whatIs_logos {
+		margin: 20px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	#whatIs {
+		padding: 0 10px;
+	}
+}
+
 #whatIs_text {
 	flex-grow: 1;
 
@@ -387,7 +421,43 @@
 			padding: 0 1%;
 			justify-content: space-around;
 		}
-	}	
+	}
+}
+
+@media (max-width: 767px) {
+	#features {
+		padding: 20px;
+
+		.contentContainer {
+			display: block;
+
+			& > * {
+				width: auto;
+				max-width: 100%;
+				margin-left: 40px;
+				padding: 20px 20px 20px 50px;
+			}
+		}
+
+		.icon {
+			top: 50%;
+			margin-top: -36px;
+			left: 0px;
+		}
+	}
+
+	#features_library {
+		margin: 20px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	#features {
+		padding: 20px 10px;
+		.contentContainer {
+			padding: 0;
+		}
+	}
 }
 
 #features_tools, #features_library, #features_sheets {
