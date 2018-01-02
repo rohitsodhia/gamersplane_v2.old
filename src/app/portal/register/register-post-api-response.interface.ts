@@ -1,17 +1,17 @@
 import { APIResponse } from '../../shared/api-response.interface';
 
 export interface RegisterPostAPIResponse extends APIResponse {
-	errors?: string[];
-	user?: {
-		userID: number,
-		username: string,
-		email: string
+	data?: {
+		user: {
+			userID: number,
+			username: string
+		}
+	},
+	errors?: {
+		recaptcha?: boolean
+		duplicates?: string[];
+		missing?: string[];
+		invalid?: string[];
+		// creatingUser?: boolean;
 	}
-}
-
-interface Errors {
-	duplicates?: string[];
-	missing?: string[];
-	invalid?: string[];
-	creatingUser?: boolean;
 }

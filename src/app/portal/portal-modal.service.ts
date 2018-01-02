@@ -26,4 +26,8 @@ export class PortalModalService {
 		this.modalService.openModal('portal');
 	}
 
+	closePortal() {
+		this.modalService.closeModal();
+	}
+
 }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as utils from '../../../utils';
 
-import { UserService } from '../../shared/user.service';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
 	selector: 'gp-login',
@@ -18,18 +18,18 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private userService: UserService,
+		private authService: AuthService,
 	) { }
 
 	ngOnInit() {
 		this.login = this.formBuilder.group({
-			user: [
+			login: [
 				'',
 				[Validators.required]
 			],
 			password: [
 				'',
-				[Validators.required, Validators.minLength(8)]
+				[Validators.required, Validators.minLength(7)]
 			],
 		});
 	}
@@ -38,14 +38,12 @@ export class LoginComponent implements OnInit {
 		if (this.login.invalid) {
 			return false;
 		}
-		this.userService.login(
+		this.authService.login(
 			this.login.get('login').value,
 			this.login.get('password').value
-		).subscribe((data) => {
-			if (data.success) {
-				// this.success.emit(data.user);
-			}
-		})
+		).subscribe(success => {
+			this.success.emit(success);
+		});
 	}
 
 	openRegister() {

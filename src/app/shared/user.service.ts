@@ -1,41 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService } from './api.service';
+import { ApiService } from 'app/shared/api.service';
 
-import { RegisterPostAPIResponse } from '../portal/register/register-post-api-response.interface';
-import { LoginGetAPIResponse } from '../portal/login/login-get-api-response';
+import { UserExistsGetApiResponse } from 'app/shared/user-exists-get-api-response.interface';
+import { RegisterPostAPIResponse } from 'app/portal/register/register-post-api-response.interface';
 
 @Injectable()
 export class UserService {
 
-	constructor(private apiService: ApiService) { }
+	private defaultAvatar: string = '/assets/images/avatar.png';
 
-	emailExists(email: string): Observable<UserExistsInterface> {
-		if (email.length === 0) {
+	constructor(private api: ApiService) { }
+
+	userExists(field: string, value: string): Observable<boolean> {
+		if ((field !== 'username' && field !== 'email') || value.length === 0) {
 			return Observable.of(null);
 		}
-		return this.apiService.get('/users/exists', { email: email });
+		return this.api
+			.get<UserExistsGetApiResponse>('/users/exists', { field: field, value: value })
+			.map(response => response.data.exists);
 	}
 
-	usernameExists(username: string): Observable<UserExistsInterface> {
-		if (username.length === 0) {
-			return Observable.of(null);
-		}
-		return this.apiService.get('/users/exists', { username: username });
+	register(details: {email: string, username: string, password: string, recaptcha: string}): Observable<RegisterPostAPIResponse> {
+		return this.api.post('/users/register', details);
 	}
 
-	register(data: {}): Observable<RegisterPostAPIResponse> {
-		return this.apiService.post('/users/register', data);
+	getAvatar(url: string) {
+		return url ? url : this.defaultAvatar;
 	}
 
-	login(user: string, password: string): Observable<LoginGetAPIResponse> {
-		return this.apiService.get('/auth/validateCredentials', { user: user, password: password });
-	}
-
-}
-
-export interface UserExistsInterface {
-	success: boolean;
-	exists: boolean;
 }

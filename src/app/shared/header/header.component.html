@@ -1,7 +1,7 @@
 <header>
 	<div id="background"></div>
 	<div class="contentContainer">
-		<a routerLink="/"><gp-logo [height]="screenWidthService > 767 ? 110 : 60"></gp-logo></a>
+		<a routerLink="/"><gp-logo [height]="(screenWidth | async) > 767 ? 110 : 60"></gp-logo></a>
 		<div id="menuWrapper">
 			<div *ngIf="(screenWidth | async) < 1024" id="mobileMenuIcon" (click)="openMobileMenu()">
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
@@ -37,17 +37,17 @@
 				<li><a routerLink="/forums">Forums</a></li>
 				<li *ngIf="loggedIn"><a routerLink="/gamersList">The Gamers</a></li>
 				<li><a routerLink="/links">Links</a></li>
-				<ng-container *ngIf="!loggedIn">
+				<ng-container *ngIf="(currentUser | async) === null">
 					<li id="register"><a (click)="openPortalModal('register')" class="last">Register</a></li>
 					<li id="login"><a (click)="openPortalModal('login')">Login</a></li>
 				</ng-container>
-				<li *ngIf="loggedIn" id="userMenu">
-					<!-- <a routerLink="/ucp" class="avatar"><img ng-src="{{avatar}}"></a>
-					<a ng-if="pmCount > 0" routerLink="/pms" class="mail"><img src="/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a> -->
+				<li *ngIf="currentUser | async" id="userMenu">
+					<a routerLink="/ucp" class="avatar"><img [src]="(currentUser.avatar | async)"></a>
+					<a ng-if="pmCount > 0" routerLink="/pms" class="mail"><img src="/assets/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a>
 					<ul>
 						<li><a routerLink="/ucp">Profile</a></li>
 						<li><a routerLink="/pms">Messages ({{pmCount}})</a></li>
-						<li><a routerLink="/logout" class="last">Logout</a></li>
+						<li><a (click)="logout()" class="last">Logout</a></li>
 					</ul>
 				</li>
 			</ul>

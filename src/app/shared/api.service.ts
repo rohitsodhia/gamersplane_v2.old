@@ -36,7 +36,6 @@ export class ApiService {
 		return params;
 	}
 
-
 	get<T = any>(path: string, data?: Object): Observable<T> {
 		let headers = new HttpHeaders();
 		headers = this.addToken(headers);
@@ -49,7 +48,8 @@ export class ApiService {
 
 	post<T = any>(path, data): Observable<T> {
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded'
 		});
 		headers = this.addToken(headers);
 		return this.http

@@ -31,6 +31,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { LogoComponent } from './shared/logo/logo.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LinksComponent } from './links/links.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
 	imports: [
@@ -56,6 +57,7 @@ import { LinksComponent } from './links/links.component';
 		LogoComponent,
 		FooterComponent,
 		LinksComponent,
+		ContactComponent,
 	],
 	providers: [
 		// {
@@ -85,9 +87,9 @@ import { LinksComponent } from './links/links.component';
 })
 export class AppModule { }
 
-export function validateUserFactory(authService: AuthService) {
-	return () => authService.validateToken();
-}
+// export function validateUserFactory(authService: AuthService) {
+// 	return () => authService.validateToken();
+// }
 
 export function initSystemsFactory(systemService: SystemService) {
 	return () => systemService.initLoad();

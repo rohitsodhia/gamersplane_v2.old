@@ -9,6 +9,8 @@ import { ScreenWidthService } from 'app/shared/screen-width.service';
 
 import { slideHeight } from 'app/shared/animations';
 
+import { User } from 'app/shared/user.interface';
+
 @Component({
 	selector: 'gp-header',
 	templateUrl: './header.component.html',
@@ -19,7 +21,7 @@ import { slideHeight } from 'app/shared/animations';
 })
 export class HeaderComponent implements OnInit {
 
-	loggedIn: boolean = false;
+	currentUser: Observable<User>;
 	toggleHeight: {} = {};
 	private currentlyOpen: { menu: any, target: any } = { menu: null, target: null };
 	screenWidth: Observable<number>;
@@ -38,7 +40,7 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit() {
 		this.screenWidth = this.screenWidthService.get();
-		this.authService.loggedIn().subscribe((loggedIn: boolean) => this.loggedIn = loggedIn);
+		this.currentUser = this.authService.getUser();
 	}
 
 	@HostListener('document:click', ['$event.target']) public onClick(targetElement) {
@@ -75,6 +77,10 @@ export class HeaderComponent implements OnInit {
 
 	closeMobileMenu() {
 		this.mobileOpen = false;
+	}
+
+	logout() {
+		this.authService.logout();
 	}
 
 }

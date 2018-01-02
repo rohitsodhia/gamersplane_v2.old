@@ -7,6 +7,8 @@ import { RegisterPostAPIResponse } from './register-post-api-response.interface'
 
 // import { RecaptchaService } from 'app/shared/recaptcha/recaptcha.service';
 import { UserService } from '../../shared/user.service';
+import { AbstractControl } from '@angular/forms/src/model';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -18,9 +20,11 @@ export class RegisterComponent implements OnInit {
 
 	register: FormGroup;
 	focusOn: string;
-	emailTaken: boolean = false;
-	usernameTaken: boolean = false;
-	human: boolean = false;
+	taken: { email: boolean, username: boolean } = {
+		email: false,
+		username: false
+	};
+	recaptchaString: string = null;
 
 	@Output() success: EventEmitter<{}> = new EventEmitter();
 
@@ -43,31 +47,24 @@ export class RegisterComponent implements OnInit {
 			password: this.formBuilder.group({
 				password: [
 					'',
-					[Validators.required, Validators.minLength(8)]
+					// [Validators.required, Validators.minLength(8)]
 				],
 				confirmPassword: [
 					'',
-					[Validators.required, Validators.minLength(8)]
+					// [Validators.required, Validators.minLength(8)]
 				]
 			}, { validator: this.samePasswords })
 		});
 
-		this.register.get('email').valueChanges
-			.filter(() => this.register.get('email').valid)
-			.distinctUntilChanged().debounceTime(500)
-			.switchMap((email) => this.userService.emailExists(email))
-			.filter((data) => data.success)
-			.subscribe((data) => {
-				this.emailTaken = data.exists;
-			});
-		this.register.get('username').valueChanges
-			.filter(() => this.register.get('username').valid)
-			.distinctUntilChanged().debounceTime(500)
-			.switchMap((email) => this.userService.usernameExists(email))
-			.filter((data) => data.success)
-			.subscribe((data) => {
-				this.usernameTaken = data.exists;
-			});
+		['email', 'username'].forEach((field: string) => {
+			this.register.get(field).valueChanges
+				.filter(() => this.register.get(field).valid)
+				.distinctUntilChanged().debounceTime(500)
+				.switchMap((value: string) => this.userService.userExists(field, value))
+				.subscribe(exists => {
+					this.taken[field] = exists;
+				});
+		});
 
 	}
 
@@ -83,17 +80,22 @@ export class RegisterComponent implements OnInit {
 		this.focusOn = null;
 	}
 
+	recaptchaResolved($event) {
+		this.recaptchaString = $event;
+	}
+
 	submitRegistration() {
-		if (!this.human && this.register.invalid) {
+		if (this.recaptchaString == null && this.register.invalid) {
 			return false;
 		}
 		this.userService.register({
 			email: this.register.get('email').value,
 			username: this.register.get('username').value,
-			password: this.register.get('password').get('password').value
-		}).subscribe((data) => {
-			if (data.success) {
-				this.success.emit(data.user);
+			password: this.register.get('password').get('password').value,
+			recaptcha: this.recaptchaString
+		}).subscribe(response => {
+			if (response.data) {
+				this.success.emit(response.data.user);
 			}
 		})
 	}

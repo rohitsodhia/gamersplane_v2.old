@@ -17,8 +17,8 @@ export class ReferralLinksService {
 	get(): Observable<ReferralLink[]> {
 		return this.api.get<ReferralLinksGetApiResponse>('/referralLinks')
 			.map(response => {
-				if (response.success) {
-					return response.referralLinks;
+				if (response.data) {
+					return response.data.referralLinks;
 				} else {
 					return [];
 				}
