@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { PortalModalService } from './portal/portal-modal.service';
 import { RootClassesService } from './shared/root-classes.service';
-import { AuthService } from 'app/shared/auth.service';
 
 @Component({
 	selector: 'app-root',
@@ -25,14 +24,12 @@ export class AppComponent implements OnInit {
 		private router: Router,
 		private activateRoute: ActivatedRoute,
 		private rootClassesService: RootClassesService,
-		private portalModalService: PortalModalService,
-		private authService: AuthService
+		private portalModalService: PortalModalService
 	) {
 		this.portalModalService.getState().subscribe(state => this.portalState = state);
 	}
 
 	ngOnInit() {
-		this.authService.validateToken();
 		this.router.events
 			.filter(event => event instanceof NavigationEnd)
 			.map(() => this.activateRoute)

@@ -13,7 +13,7 @@ export class ApiService {
     constructor(private http: HttpClient) { }
 
 	private addToken(headers: HttpHeaders) {
-		let token = localStorage.getItem('token');
+		let token = localStorage.getItem('jwt');
 		if (token) {
 			headers = headers.set('Authorization', 'Bearer ' + token);
 		}

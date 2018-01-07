@@ -6,32 +6,33 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RecaptchaModule } from 'ng-recaptcha';
 
-import { SharedModule } from './shared/shared.module';
-import { PageLoadOverlayModule } from './shared/page-load-overlay/page-load-overlay.module';
-import { ModalModule } from './shared/modal/modal.module';
-// import { RecaptchaModule } from './shared/recaptcha/recaptcha.module';
-import { PortalModule } from './portal/portal.module';
-import { AppRoutingModule } from './app-routing.module';
-import { LandingModule } from './landing/landing.module';
-import { ToolsModule } from './tools/tools.module';
+import { SharedModule } from 'app/shared/shared.module';
+import { PageLoadOverlayModule } from 'app/shared/page-load-overlay/page-load-overlay.module';
+import { ModalModule } from 'app/shared/modal/modal.module';
+// import { RecaptchaModule } from 'app/shared/recaptcha/recaptcha.module';
+import { PortalModule } from 'app/portal/portal.module';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { LandingModule } from 'app/landing/landing.module';
+import { ToolsModule } from 'app/tools/tools.module';
 
-import { HbMarginService } from './shared/hb-margin.service';
-import { ApiService } from './shared/api.service';
-import { ScreenWidthService } from './shared/screen-width.service';
-import { RootClassesService } from './shared/root-classes.service';
-import { GlobalResolverService } from './shared/global-resolver.service';
-import { ReferralLinksService } from './shared/referral-links.service';
-import { UserService } from './shared/user.service';
-import { AuthService } from './shared/auth.service';
-import { SystemService } from './shared/system.service';
-import { GameService } from './shared/game.service';
+import { HbMarginService } from 'app/shared/hb-margin.service';
+import { ApiService } from 'app/shared/api.service';
+import { ScreenWidthService } from 'app/shared/screen-width.service';
+import { RootClassesService } from 'app/shared/root-classes.service';
+import { GlobalResolverService } from 'app/shared/global-resolver.service';
+import { ReferralLinksService } from 'app/shared/referral-links.service';
+import { UserService } from 'app/shared/user.service';
+import { PMService } from 'app/pms/pm.service';
+import { AuthService } from 'app/shared/auth.service';
+import { SystemService } from 'app/shared/system.service';
+import { GameService } from 'app/shared/game.service';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { LogoComponent } from './shared/logo/logo.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { LinksComponent } from './links/links.component';
-import { ContactComponent } from './contact/contact.component';
+import { AppComponent } from 'app/app.component';
+import { HeaderComponent } from 'app/shared/header/header.component';
+import { LogoComponent } from 'app/shared/logo/logo.component';
+import { FooterComponent } from 'app/shared/footer/footer.component';
+import { LinksComponent } from 'app/links/links.component';
+import { ContactComponent } from 'app/contact/contact.component';
 
 @NgModule({
 	imports: [
@@ -60,12 +61,18 @@ import { ContactComponent } from './contact/contact.component';
 		ContactComponent,
 	],
 	providers: [
-		// {
-		// 	provide: APP_INITIALIZER,
-		// 	useFactory: validateUserFactory,
-		// 	deps: [AuthService],
-		// 	multi: true
-		// },
+		{
+			provide: APP_INITIALIZER,
+			useFactory: validateUserFactory,
+			deps: [AuthService],
+			multi: true
+		},
+		{
+			provide: APP_INITIALIZER,
+			useFactory: initPMTimer,
+			deps: [PMService],
+			multi: true
+		},
 		{
 			provide: APP_INITIALIZER,
 			useFactory: initSystemsFactory,
@@ -80,6 +87,7 @@ import { ContactComponent } from './contact/contact.component';
 		ReferralLinksService,
 		AuthService,
 		UserService,
+		PMService,
 		SystemService,
 		GameService,
 	],
@@ -87,9 +95,13 @@ import { ContactComponent } from './contact/contact.component';
 })
 export class AppModule { }
 
-// export function validateUserFactory(authService: AuthService) {
-// 	return () => authService.validateToken();
-// }
+export function validateUserFactory(authService: AuthService) {
+	return () => authService.validateToken();
+}
+
+export function initPMTimer(pmService: PMService) {
+	return () => pmService.createPMCountRefresh();
+}
 
 export function initSystemsFactory(systemService: SystemService) {
 	return () => systemService.initLoad();

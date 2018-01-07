@@ -37,14 +37,14 @@
 				<li><a routerLink="/forums">Forums</a></li>
 				<li *ngIf="loggedIn"><a routerLink="/gamersList">The Gamers</a></li>
 				<li><a routerLink="/links">Links</a></li>
-				<ng-container *ngIf="(currentUser | async) === null">
+				<ng-container *ngIf="(currentUser$ | async) === null">
 					<li id="register"><a (click)="openPortalModal('register')" class="last">Register</a></li>
 					<li id="login"><a (click)="openPortalModal('login')">Login</a></li>
 				</ng-container>
-				<li *ngIf="currentUser | async" id="userMenu">
-					<a routerLink="/ucp" class="avatar"><img [src]="(currentUser.avatar | async)"></a>
-					<a ng-if="pmCount > 0" routerLink="/pms" class="mail"><img src="/assets/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a>
-					<ul>
+				<li *ngIf="currentUser$ | async" id="userMenu">
+					<a (click)="toggleMenu($event, '/ucp', 'user')" class="avatar"><img [src]="(currentUser$ | async).getAvatar()"></a>
+					<a *ngIf="(pmCount$ | async) > 0" routerLink="/pms" class="mail"><img src="/assets/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a>
+					<ul [@slideHeight]="toggleHeight['user']">
 						<li><a routerLink="/ucp">Profile</a></li>
 						<li><a routerLink="/pms">Messages ({{pmCount}})</a></li>
 						<li><a (click)="logout()" class="last">Logout</a></li>

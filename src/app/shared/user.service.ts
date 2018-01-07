@@ -9,8 +9,6 @@ import { RegisterPostAPIResponse } from 'app/portal/register/register-post-api-r
 @Injectable()
 export class UserService {
 
-	private defaultAvatar: string = '/assets/images/avatar.png';
-
 	constructor(private api: ApiService) { }
 
 	userExists(field: string, value: string): Observable<boolean> {
@@ -24,10 +22,6 @@ export class UserService {
 
 	register(details: {email: string, username: string, password: string, recaptcha: string}): Observable<RegisterPostAPIResponse> {
 		return this.api.post('/users/register', details);
-	}
-
-	getAvatar(url: string) {
-		return url ? url : this.defaultAvatar;
 	}
 
 }

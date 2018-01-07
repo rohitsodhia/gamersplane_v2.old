@@ -2,14 +2,14 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthService } from 'app/shared/auth.service';
-
 import { PortalModalService } from 'app/portal/portal-modal.service';
 import { ScreenWidthService } from 'app/shared/screen-width.service';
+import { AuthService } from 'app/shared/auth.service';
+import { PMService } from 'app/pms/pm.service';
 
 import { slideHeight } from 'app/shared/animations';
 
-import { User } from 'app/shared/user.interface';
+import { User } from 'app/shared/user.class';
 
 @Component({
 	selector: 'gp-header',
@@ -21,7 +21,9 @@ import { User } from 'app/shared/user.interface';
 })
 export class HeaderComponent implements OnInit {
 
-	currentUser: Observable<User>;
+	currentUser$: Observable<User>;
+	loggedIn: boolean = false;
+	pmCount$: Observable<number>;
 	toggleHeight: {} = {};
 	private currentlyOpen: { menu: any, target: any } = { menu: null, target: null };
 	screenWidth: Observable<number>;
@@ -32,15 +34,19 @@ export class HeaderComponent implements OnInit {
 		private screenWidthService: ScreenWidthService,
 		private portalModalService: PortalModalService,
 		private authService: AuthService,
+		private pmService: PMService
 	) {
 		this.toggleHeight = {
-			tools: 'closed'
+			tools: 'closed',
+			user: 'closed'
 		}
 	}
 
 	ngOnInit() {
 		this.screenWidth = this.screenWidthService.get();
-		this.currentUser = this.authService.getUser();
+		this.currentUser$ = this.authService.getUser();
+		this.currentUser$.subscribe(user => this.loggedIn = !!user);
+		this.pmCount$ = this.pmService.getPMCount();
 	}
 
 	@HostListener('document:click', ['$event.target']) public onClick(targetElement) {

@@ -10,7 +10,7 @@ import { RegisterPostAPIResponse } from 'app/portal/register/register-post-api-r
 import { LoginPostAPIResponse } from 'app/portal/login/login-post-api-response';
 import { UserService } from 'app/shared/user.service';
 
-import { User } from './user.interface';
+import { User } from 'app/shared/user.class';
 
 @Injectable()
 export class AuthService {
@@ -19,13 +19,8 @@ export class AuthService {
 
 	constructor(
 		private api: ApiService,
-		private userService: UserService
+		private userService: UserService,
 	) { }
-
-	register(data: {}): Observable<RegisterPostAPIResponse> {
-		return this.api
-			.post('/users/register', data);
-	}
 
 	login(login: string, password: string): Observable<boolean> {
 		return this.api
@@ -50,14 +45,17 @@ export class AuthService {
 		let jwt: string = localStorage.getItem('jwt');
 		if (jwt && jwt.length) {
 			let decoded: UserJWT = jwtDecode(jwt);
-			this.currentUser.next({
+			let newUser = new User({
 				userId: decoded.userId,
 				username: decoded.username,
-				avatar: this.userService.getAvatar(decoded.avatar)
+				avatar: decoded.avatar
 			});
+			this.currentUser.next(newUser);
 		} else {
 			this.currentUser.next(null);
 		}
+
+		return Promise.resolve(true);
 	}
 
 	getUser(): Observable<User> {
