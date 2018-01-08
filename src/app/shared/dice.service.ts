@@ -152,7 +152,6 @@ export class DiceService {
 				fortune: null,
 				total: actionValue
 			};
-			console.log(result);
 		if (type === 'standard' || type === 'fortune') {
 			let roll: number = 0;
 			do {
