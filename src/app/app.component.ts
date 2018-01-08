@@ -12,7 +12,7 @@ import { RootClassesService } from './shared/root-classes.service';
 })
 export class AppComponent implements OnInit {
 
-	rootClasses: string[];
+	contentClasses: string[];
 	portalState: string;
 	registeredUser: {
 		userID: number,
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private activateRoute: ActivatedRoute,
+		private activatedRoute: ActivatedRoute,
 		private rootClassesService: RootClassesService,
 		private portalModalService: PortalModalService
 	) {
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		this.router.events
 			.filter(event => event instanceof NavigationEnd)
-			.map(() => this.activateRoute)
+			.map(() => this.activatedRoute)
 			.map((route) => {
 				while (route.firstChild) {
 					route = route.firstChild;
@@ -40,7 +40,12 @@ export class AppComponent implements OnInit {
 				return route;
 			})
 			.flatMap(route => route.data)
-			.subscribe(data => { this.rootClasses = data['rootClasses'] ? data['rootClasses'] : []; });
+			.subscribe(data => {
+				this.contentClasses = data['contentClasses'] ? data['contentClasses'] : [];
+				if (data['headerSize'] === 'large') {
+					this.contentClasses.push('largeHeader');
+				}
+			});
 	}
 
 	userRegistered(user) {

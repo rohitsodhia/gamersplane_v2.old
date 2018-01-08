@@ -9,7 +9,8 @@ const routes: Routes = [
 		component: LandingComponent,
 		pathMatch: 'full',
 		data: {
-			rootClasses: ['fullWidth', 'underHeader']
+			contentClasses: ['fullWidth', 'underHeader'],
+			headerSize: 'large'
 		},
 	},
 ];

@@ -1,7 +1,7 @@
-<header>
+<header [ngClass]="headerSize">
 	<div id="background"></div>
 	<div class="contentContainer">
-		<a routerLink="/"><gp-logo [height]="(screenWidth | async) > 767 ? 110 : 60"></gp-logo></a>
+		<a routerLink="/"><gp-logo></gp-logo></a>
 		<div id="menuWrapper">
 			<div *ngIf="(screenWidth | async) < 1024" id="mobileMenuIcon" (click)="openMobileMenu()">
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
@@ -46,7 +46,7 @@
 					<a *ngIf="(pmCount$ | async) > 0" routerLink="/pms" class="mail"><img src="/assets/images/envelope.jpg" title="Private Messages" alt="Private Messages"></a>
 					<ul [@slideHeight]="toggleHeight['user']">
 						<li><a routerLink="/ucp">Profile</a></li>
-						<li><a routerLink="/pms">Messages ({{pmCount}})</a></li>
+						<li><a routerLink="/pms">Messages ({{pmCount$ | async}})</a></li>
 						<li><a (click)="logout()" class="last">Logout</a></li>
 					</ul>
 				</li>

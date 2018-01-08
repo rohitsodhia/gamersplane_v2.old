@@ -17,7 +17,7 @@ export class GlobalResolverService {
 	init() {
 		this.events$ = this.router.events
 			.filter(event => event instanceof ResolveStart)
-			.subscribe(event => { console.log(event) });
+			.subscribe((event: ResolveStart) => { console.log(event.state.root.firstChild.data) });
 	}
 
 	add(func: ((any) => any), key: string = null) {

@@ -14,29 +14,32 @@ import { APIResponse } from 'app/shared/api-response.interface';
 export class PMService {
 
 	private pmCountRefresh: number = 1000 * 60 * 5;
+	private pmCountAPI$: Observable<number>;
 	private pmCount$: Observable<number>;
 
 	constructor(
 		private api: ApiService,
 		private authService: AuthService
-	) { }
-
-	createPMCountRefresh() {
+	) {
+		this.pmCountAPI$ = this.api.get('/pms', { count: true }).pipe(
+			map((data: pmCountGetAPIResponse) => data.data.count)
+		);
 		this.pmCount$ = this.authService.getUser().pipe(
 			distinctUntilChanged(),
 			switchMap(user => {
 				if (user) {
-					return Observable.timer(0, this.pmCountRefresh).pipe(
-						switchMap(() => this.api.get('/pms', { count: true }).pipe(
-							map((data: pmCountGetAPIResponse) => data.data.count))
-						)
+					return Observable.timer(this.pmCountRefresh, this.pmCountRefresh).pipe(
+						switchMap(() => this.pmCountAPI$)
 					)
 				} else {
 					return Observable.of(null);
 				}
 			})
-		);
-		return this.pmCount$.first().toPromise();
+		).publishReplay(1).refCount();
+	}
+
+	getInitialPMCount() {
+		return this.pmCountAPI$.toPromise();
 	}
 
 	getPMCount() {

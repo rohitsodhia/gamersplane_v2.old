@@ -5,8 +5,14 @@ header {
 	z-index: 6000;
 	width: 100%;
 
-	&, & > * {
-		height: 120px;
+	&, & > *, gp-logo {
+		height: 70px;
+	}
+
+	&.large {
+		&, & > *, gp-logo {
+			height: 120px;
+		}
 	}
 
 	.contentContainer {

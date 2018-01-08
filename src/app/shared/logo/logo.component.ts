@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange, ElementRef } from '@angular/core';
 
 @Component({
 	selector: 'gp-logo',
@@ -7,9 +7,9 @@ import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 })
 export class LogoComponent implements OnChanges {
 
-	@Input() width: number = 340;
-	@Input() height: number = 180;
-	whRatio: number = 340 / 180;
+	@Input() width: number = 170;
+	@Input() height: number = 90;
+	whRatio: number = 170 / 90;
 
 	constructor() { }
 

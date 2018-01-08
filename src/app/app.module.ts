@@ -100,7 +100,7 @@ export function validateUserFactory(authService: AuthService) {
 }
 
 export function initPMTimer(pmService: PMService) {
-	return () => pmService.createPMCountRefresh();
+	return () => pmService.getInitialPMCount();
 }
 
 export function initSystemsFactory(systemService: SystemService) {

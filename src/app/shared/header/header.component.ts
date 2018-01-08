@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { PortalModalService } from 'app/portal/portal-modal.service';
@@ -10,6 +10,7 @@ import { PMService } from 'app/pms/pm.service';
 import { slideHeight } from 'app/shared/animations';
 
 import { User } from 'app/shared/user.class';
+import { headersToString } from 'selenium-webdriver/http';
 
 @Component({
 	selector: 'gp-header',
@@ -21,6 +22,8 @@ import { User } from 'app/shared/user.class';
 })
 export class HeaderComponent implements OnInit {
 
+	headerSize: string = 'standard';
+	private defaultSize: string = 'standard';
 	currentUser$: Observable<User>;
 	loggedIn: boolean = false;
 	pmCount$: Observable<number>;
@@ -31,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
 	constructor(
 		private router: Router,
+		private activatedRoute: ActivatedRoute,
 		private screenWidthService: ScreenWidthService,
 		private portalModalService: PortalModalService,
 		private authService: AuthService,
@@ -43,7 +47,23 @@ export class HeaderComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.router.events
+			.filter(event => event instanceof NavigationEnd)
+			.map(() => this.activatedRoute)
+			.map((route) => {
+				while (route.firstChild) {
+					route = route.firstChild;
+				}
+				return route;
+			})
+			.flatMap(route => route.data)
+			.subscribe(data => {
+				this.headerSize = data['headerSize'] ? data['headerSize'] : 'standard';
+				this.defaultSize = this.headerSize;
+			});
+
 		this.screenWidth = this.screenWidthService.get();
+		this.screenWidth.subscribe(width => this.headerSize = (width > 767) ? this.defaultSize : 'standard');
 		this.currentUser$ = this.authService.getUser();
 		this.currentUser$.subscribe(user => this.loggedIn = !!user);
 		this.pmCount$ = this.pmService.getPMCount();
