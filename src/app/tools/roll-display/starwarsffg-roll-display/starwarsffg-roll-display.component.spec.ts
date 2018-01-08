@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StarwarsffgRollDisplayComponent } from './starwarsffg-roll-display.component';
+import { StarWarsFFGRollDisplayComponent } from './starwarsffg-roll-display.component';
 
-describe('StarwarsffgRollDisplayComponent', () => {
-  let component: StarwarsffgRollDisplayComponent;
-  let fixture: ComponentFixture<StarwarsffgRollDisplayComponent>;
+describe('StarWarsFFGRollDisplayComponent', () => {
+  let component: StarWarsFFGRollDisplayComponent;
+  let fixture: ComponentFixture<StarWarsFFGRollDisplayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StarwarsffgRollDisplayComponent ]
+      declarations: [ StarWarsFFGRollDisplayComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StarwarsffgRollDisplayComponent);
+    fixture = TestBed.createComponent(StarWarsFFGRollDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

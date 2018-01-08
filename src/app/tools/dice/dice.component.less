@@ -1,4 +1,4 @@
-/deep/ #diceTypeSelect {
+::ng-deep #diceTypeSelect {
 	.wrapper {
 		border-top: 2px solid #000;
 	}
@@ -179,11 +179,11 @@
 		font-weight: bold;
 	}
 
-	/deep/ gp-starwarsffg-die, /deep/ gp-fate-die {
+	::ng-deep gp-starwarsffg-die, ::ng-deep gp-fate-die {
 		margin-right: 10px;
 	}
 
-	/deep/ gp-fate-die {
+	::ng-deep gp-fate-die {
 		width: 40px;
 		height: 40px;
 	}
@@ -194,4 +194,20 @@
 		width: 30px;
 		text-align: center;
 	}
+}
+
+.dice_fengshui {
+	.clearfix {
+		display: flex;
+		align-items: center;
+
+		& > * {
+			margin-right: 4px;
+		}
+	}
+}
+
+#fengshui_av {
+	width: 40px;
+	text-align: center;
 }

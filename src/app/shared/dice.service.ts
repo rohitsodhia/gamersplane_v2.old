@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
 
-import * as utils from '../../utils';
+import * as utils from 'utils';
 
-import { BasicDie } from '../tools/BasicDie.class';
-import { FateDie } from '../tools/FateDie.class';
-import { StarWarsFFGDie } from '../tools/StarWarsFFGDie.class';
+import { BasicDie } from 'app/tools/BasicDie.class';
+import { FateDie } from 'app/tools/FateDie.class';
+import { StarWarsFFGDie } from 'app/tools/StarWarsFFGDie.class';
 
 @Injectable()
 export class DiceService {
 
-	types: {} = {
+	private readonly types = {
 		basic: 'Basic Dice',
 		starwarsffg: 'Star Wars FFG',
 		fate: 'Fate Dice',
 		fengshui: 'Feng Shui'
 	};
-	basicDieRegex: RegExp = /^(\d+)?[dD](\d+)$/;
+	private readonly basicDieRegex = /^(\d+)?[dD](\d+)$/;
+	private readonly fengShuiTypes = ['standard', 'fortune', 'closed']
 
 	constructor() { }
 
-	getTypes(): {} {
+	getTypes() {
 		return this.types;
+	}
+
+	getFengShuiTypes() {
+		return this.fengShuiTypes;
 	}
 
 	rollDice(type: string, dice: any, options: { [key: string]: string | boolean } = {}): any[] | { [key: string]: any } {
@@ -36,36 +41,36 @@ export class DiceService {
 			[numDice, modifier] = (<string> dice).split('+').map((value) => parseInt(value));
 			let results = this.rollFateDice(numDice, modifier);
 			return results;
-		} else if (type === 'fengShui') {
-			let results = this.rollFengShuiDice(dice, <string> options['type']);
+		} else if (type === 'fengshui') {
+			let results = this.rollFengShuiDice(parseInt(dice), <string> options['type']);
 			return results;
 		}
 	}
 
-	rollBasicDice(diceString: string, options: { [key: string]: string | boolean }): (string | number | object)[] {
+	rollBasicDice(diceString: string, options: { [key: string]: string | boolean }): (string | number | BasicDieConfig)[] {
 		let dice = this.parseBasicDice(diceString);
-		dice.forEach((value) => {
-			if (typeof value === 'object') {
-				for (let count = 0; count < value['num']; count++) {
+		dice.forEach(part => {
+			if (typeof part === 'object') {
+				for (let count = 0; count < part['num']; count++) {
 					let roll: number[] = [];
-					let die = new BasicDie(value['numFaces']);
+					let die = new BasicDie(part['numSides']);
 					do {
 						roll.push(die.roll());
-					} while (options['rerollAces'] && roll.slice(-1)[0] === value['numSides']);
+					} while (options['rerollAces'] && roll.slice(-1)[0] === part['numSides']);
 					if (roll.length === 1) {
-						value['results'].push(roll[0]);
+						part['results'].push(roll[0]);
 					} else {
-						value['results'].push(roll);
+						part['results'].push(roll);
 					}
-					value['total'] += utils.sumArray(roll);
+					part['total'] += utils.sumArray(roll);
 				}
 			}
 		});
 		return dice;
 	}
 
-	private parseBasicDice(diceString: string): (string | number | object)[] {
-		let parsed: (string | number | object)[] = [];
+	private parseBasicDice(diceString: string): (string | number | BasicDieConfig)[] {
+		let parsed: (string | number | BasicDieConfig)[] = [];
 		let dieSet: string = '';
 		diceString = diceString.replace(/\s/g, '');
 		for (let char of diceString) {
@@ -73,8 +78,8 @@ export class DiceService {
 				dieSet += char;
 			} else {
 				parsed.push(this.parseDieSet(dieSet));
-				dieSet = '';
 				parsed.push(char);
+				dieSet = '';
 			}
 		}
 		if (dieSet !== '') {
@@ -83,7 +88,7 @@ export class DiceService {
 		return parsed;
 	}
 
-	private parseDieSet(dieSet: string) {
+	private parseDieSet(dieSet: string): (BasicDieConfig | number) {
 		let match;
 		if (match = dieSet.match(this.basicDieRegex)) {
 			return {
@@ -133,18 +138,21 @@ export class DiceService {
 	private rollFengShuiDice(actionValue: number, type: string = 'standard') {
 		let die: BasicDie = new BasicDie(6),
 			result: {
+				type: string,
 				actionValue: number,
 				positive: number[],
 				negative: number[],
 				fortune: number,
 				total: number
 			} = {
+				type: type,
 				actionValue: actionValue,
 				positive: [],
 				negative: [],
-				fortune: 0,
+				fortune: null,
 				total: actionValue
 			};
+			console.log(result);
 		if (type === 'standard' || type === 'fortune') {
 			let roll: number = 0;
 			do {
@@ -169,4 +177,12 @@ export class DiceService {
 		return result;
 	}
 
+}
+
+interface BasicDieConfig {
+	string: string,
+	num: number,
+	numSides: number,
+	results: (number | number[])[],
+	total: number
 }

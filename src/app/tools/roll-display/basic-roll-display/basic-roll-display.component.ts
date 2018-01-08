@@ -17,7 +17,6 @@ export class BasicRollDisplayComponent implements OnInit {
 	ngOnInit() {
 		let evalString: string = '';
 		this.roll.forEach(rollPiece => {
-			console.log(rollPiece);
 			if (typeof rollPiece === 'object') {
 				this.rollString += rollPiece['string'] + ' ';
 				this.diceString += this.assembleDieString(rollPiece) + ' ';

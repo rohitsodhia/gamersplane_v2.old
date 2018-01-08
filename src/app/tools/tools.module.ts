@@ -10,10 +10,10 @@ import { DiceComponent } from './dice/dice.component';
 import { RollDisplayComponent } from './roll-display/roll-display.component';
 import { StarWarsFFGDieComponent } from './starwarsffg-die/starwarsffg-die.component';
 import { BasicRollDisplayComponent } from './roll-display/basic-roll-display/basic-roll-display.component';
-import { StarwarsffgRollDisplayComponent } from './roll-display/starwarsffg-roll-display/starwarsffg-roll-display.component';
+import { StarWarsFFGRollDisplayComponent } from './roll-display/starwarsffg-roll-display/starwarsffg-roll-display.component';
 import { FateRollDisplayComponent } from './roll-display/fate-roll-display/fate-roll-display.component';
 import { FateDieComponent } from './fate-die/fate-die.component';
-import { FengShuiDisplayComponent } from './roll-display/feng-shui-display/feng-shui-display.component';
+import { FengShuiRollDisplayComponent } from './roll-display/feng-shui-roll-display/feng-shui-roll-display.component';
 
 @NgModule({
 	imports: [
@@ -26,18 +26,19 @@ import { FengShuiDisplayComponent } from './roll-display/feng-shui-display/feng-
 		RollDisplayComponent,
 		StarWarsFFGDieComponent,
 		BasicRollDisplayComponent,
-		StarwarsffgRollDisplayComponent,
+		StarWarsFFGRollDisplayComponent,
 		FateRollDisplayComponent,
 		FateDieComponent,
-		FengShuiDisplayComponent,
+		FengShuiRollDisplayComponent,
 	],
 	providers: [
 		DiceService
 	],
 	entryComponents: [
 		BasicRollDisplayComponent,
-		StarwarsffgRollDisplayComponent,
+		StarWarsFFGRollDisplayComponent,
 		FateRollDisplayComponent,
+		FengShuiRollDisplayComponent,
 	]
 })
 export class ToolsModule { }

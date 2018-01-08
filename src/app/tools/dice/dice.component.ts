@@ -1,10 +1,10 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 
-import * as utils from '../../../utils';
+import * as utils from 'utils';
 
-import { StarWarsFFGDie } from '../StarWarsFFGDie.class';
+import { StarWarsFFGDie } from 'app/tools/StarWarsFFGDie.class';
 
-import { DiceService } from '../../shared/dice.service';
+import { DiceService } from 'app/shared/dice.service';
 
 
 @Component({
@@ -32,14 +32,21 @@ import { DiceService } from '../../shared/dice.service';
 })
 export class DiceComponent implements OnInit {
 
+	utils;
 	diceTypes: {};
 	currentType: string = null;
 	rolls: any[] = [];
 	starWarsFFGTypes: string[] = StarWarsFFGDie.getTypes();
 	starWarsFFGDisplay: string[][] = [];
 	starWarsFFGDicePool: string[] = [];
+	fengShuiTypes: {[key: string]: string} = {};
+	fengShuiType: string;
 
-	constructor(private diceService: DiceService) { }
+	constructor(
+		private diceService: DiceService
+	) {
+		this.utils = utils;
+	}
 
 	ngOnInit() {
 		this.diceTypes = this.diceService.getTypes();
@@ -53,6 +60,11 @@ export class DiceComponent implements OnInit {
 				this.starWarsFFGDisplay[index % 3].push(die);
 			}
 		});
+
+		this.diceService.getFengShuiTypes().forEach(type => {
+			this.fengShuiTypes[type] = utils.ucFirst(type);
+		});
+		this.fengShuiType = this.diceService.getFengShuiTypes()[0];
 	}
 
 	changeDiceType(type) {
@@ -102,10 +114,10 @@ export class DiceComponent implements OnInit {
 		});
 	}
 
-	rollFengShui(actionValue, type) {
+	rollFengShuiDice(actionValue, type) {
 		this.rolls.unshift({
-			type: 'fengShui',
-			roll: this.diceService.rollDice('fengShui', actionValue, { type: type })
+			type: 'fengshui',
+			roll: this.diceService.rollDice('fengshui', actionValue, { type: type })
 		});
 	}
 

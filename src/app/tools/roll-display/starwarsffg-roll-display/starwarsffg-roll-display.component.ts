@@ -9,7 +9,7 @@ import { StarWarsFFGDie } from '../../StarWarsFFGDie.class';
 	templateUrl: './starwarsffg-roll-display.component.html',
 	styleUrls: ['./starwarsffg-roll-display.component.less']
 })
-export class StarwarsffgRollDisplayComponent implements OnInit {
+export class StarWarsFFGRollDisplayComponent implements OnInit {
 
 	faces: { [key: string]: string[][] } = StarWarsFFGDie.getFaces();
 

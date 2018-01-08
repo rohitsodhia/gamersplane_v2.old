@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FengShuiDisplayComponent } from './feng-shui-display.component';
+import { FengShuiRollDisplayComponent } from './feng-shui-roll-display.component';
 
 describe('FengShuiDisplayComponent', () => {
-  let component: FengShuiDisplayComponent;
-  let fixture: ComponentFixture<FengShuiDisplayComponent>;
+  let component: FengShuiRollDisplayComponent;
+  let fixture: ComponentFixture<FengShuiRollDisplayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FengShuiDisplayComponent ]
+      declarations: [ FengShuiRollDisplayComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FengShuiDisplayComponent);
+    fixture = TestBed.createComponent(FengShuiRollDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
