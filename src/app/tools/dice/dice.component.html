@@ -12,9 +12,9 @@
 			<p>Dice should be in the format<br>(number of dice)d(die type)(modifier)</p>
 			<p>Separate rolls should be separated by commas or on new lines.</p>
 			<p><i>Example: 2d4, 3d6+4</i></p>
-			<div id="basic_customDice">
-				<div class="clearfix vAlignMiddle">
-					<textarea id="basic_dice" name="dice" #basicDice></textarea>
+			<div>
+				<div class="dicePoolWrapper">
+					<textarea name="dice" class="dicePool" #basicDice></textarea>
 					<div class="rollWrapper"><button type="submit" class="fancyButton rollBtn" (click)="rollBasicDice(basicDice.value, rerollAcesCB.currentValue)" gp-skew>Roll</button></div>
 					<div class="cbWrapper">
 						<gp-pretty-checkbox #rerollAcesCB></gp-pretty-checkbox><label for (click)="rerollAcesCB.toggle()">Reroll Aces</label>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="dice_starwarsffg" *ngSwitchCase="'starwarsffg'">
-			<div class="clearfix vAlignMiddle">
+			<div class="dicePoolWrapper">
 				<div class="dicePool">
 					<gp-starwarsffg-die *ngFor="let die of starWarsFFGDicePool; let index = index" (click)="removeStarWarsFFGDie(index)" [die]="die"></gp-starwarsffg-die>
 				</div>
@@ -44,17 +44,21 @@
 				Click on a die below to add it to the dice pool.<br>
 				Click on a die above to remove it from the dice pool.
 			</p>
-			<div *ngFor="let typeGroup of starWarsFFGDisplay" class="clearfix">
-				<a *ngFor="let type of typeGroup; let first = first;" (click)="addStarWarsFFGDie(type)" class="addDiceLink" [ngClass]="type">
-					<gp-starwarsffg-die [die]="type"></gp-starwarsffg-die>
-					<span>{{utils.ucFirst(type)}}</span>
-				</a>
-			</div>
-			<div class="alignCenter">
-				<a (click)="addStarWarsFFGDie(type)" class="addDiceLink borderBox force">
-					<gp-starwarsffg-die [die]="'force'"></gp-starwarsffg-die>
-					<span>Force</span>
-				</a>
+			<div id="starwarsffg_diceButtons">
+				<div class="twoCol">
+					<div *ngFor="let typeGroup of starWarsFFGDisplay" class="col">
+						<a *ngFor="let type of typeGroup; let first = first;" (click)="addStarWarsFFGDie(type)" class="addDiceLink" [ngClass]="type">
+							<gp-starwarsffg-die [die]="type"></gp-starwarsffg-die>
+							<span>{{utils.ucFirst(type)}}</span>
+						</a>
+					</div>
+				</div>
+				<div class="col">
+					<a (click)="addStarWarsFFGDie(type)" class="addDiceLink borderBox force">
+						<gp-starwarsffg-die [die]="'force'"></gp-starwarsffg-die>
+						<span>Force</span>
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class="dice_fate" *ngSwitchCase="'fate'">

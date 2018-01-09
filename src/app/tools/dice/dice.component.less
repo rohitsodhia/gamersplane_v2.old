@@ -43,6 +43,15 @@
 	}
 }
 
+.dicePoolWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.dicePool {
+	flex-grow: 2;
+}
+
 #basic_indivDice {
 	& > div {
 		text-align: center;
@@ -83,10 +92,22 @@
 		}
 	}
 
+	#starwarsffg_diceButtons {
+		.twoCol {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.col {
+			display: inline-block;
+			flex: 0;
+		}
+	}
+
 	.addDiceLink {
-		display: inline-block;
-		width: 48%;
-		margin: 5px 1%;
+		display: block;
+		width: 190px;
+		margin: 5px 0;
 		padding: 5px 10px;
 		border: 1px solid #000;	
 		box-sizing: border-box;
@@ -121,7 +142,7 @@
 		&.force {
 			display: block;
 			float: none;
-			margin: 5px auto;
+			margin: 0 auto;
 		}
 	}
 
@@ -210,4 +231,38 @@
 #fengshui_av {
 	width: 40px;
 	text-align: center;
+}
+
+
+@media (max-width: 767px) {
+	#roller {
+		float: none;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.dice_starwarsffg {
+		gp-starwarsffg-die {
+			display: none;
+		}
+
+		#starwarsffg_diceButtons {
+			.twoCol {
+				display: block;
+			}
+
+			.col {
+				display: flex;
+				flex: none;
+				justify-content: space-evenly;
+			}
+
+			.addDiceLink {
+				display: inline-block;
+				width: 32%;
+				flex: 0 1 auto;
+				margin: 5px 1%;
+			}
+		}
+	}
 }

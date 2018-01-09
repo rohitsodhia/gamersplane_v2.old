@@ -50,16 +50,10 @@ export class DiceComponent implements OnInit {
 
 	ngOnInit() {
 		this.diceTypes = this.diceService.getTypes();
-		this.currentType = Object.keys(this.diceTypes)[0];
+		this.currentType = Object.keys(this.diceTypes)[1];
 
-		this.starWarsFFGTypes.forEach((die, index) => {
-			if (this.starWarsFFGDisplay[index % 3] === undefined) {
-				this.starWarsFFGDisplay[index % 3] = [];
-			}
-			if (die !== 'force') {
-				this.starWarsFFGDisplay[index % 3].push(die);
-			}
-		});
+		this.starWarsFFGDisplay.push(this.starWarsFFGTypes.slice(0, 3));
+		this.starWarsFFGDisplay.push(this.starWarsFFGTypes.slice(3, 6));
 
 		this.diceService.getFengShuiTypes().forEach(type => {
 			this.fengShuiTypes[type] = utils.ucFirst(type);
