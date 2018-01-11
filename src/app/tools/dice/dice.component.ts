@@ -50,7 +50,7 @@ export class DiceComponent implements OnInit {
 
 	ngOnInit() {
 		this.diceTypes = this.diceService.getTypes();
-		this.currentType = Object.keys(this.diceTypes)[1];
+		this.currentType = Object.keys(this.diceTypes)[0];
 
 		this.starWarsFFGDisplay.push(this.starWarsFFGTypes.slice(0, 3));
 		this.starWarsFFGDisplay.push(this.starWarsFFGTypes.slice(3, 6));
